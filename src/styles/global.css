@@ -41,6 +41,19 @@
   .container {
     @apply max-w-7xl mx-auto px-4;
   }
+
+   /* NAVBAR SCROLL STATE */
+  #navbar.scrolled .nav-link {
+    @apply !text-blue;
+  }
+
+  #navbar.scrolled .logo-text {
+    @apply text-blue;
+  }
+
+  #navbar.scrolled #mobile-menu-btn {
+    @apply text-blue;
+  }
 }
 
 @layer utilities {
