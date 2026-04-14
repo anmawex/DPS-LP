@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
 	title?: string;
@@ -10,10 +11,12 @@ const {
 	title = "Préstamos para Autos y Refinanciamiento | Tu Socio Financiero",
 	description = "Obtén el auto de tus sueños o refinancia tu casa con las mejores tasas del mercado. Proceso rápido, seguro y 100% transparente."
 } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />

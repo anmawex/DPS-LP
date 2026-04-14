@@ -1,31 +1,39 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+import { Menu, X } from "lucide-astro";
+
 ---
 
 <header id="navbar" class="fixed w-full top-0 z-50 bg-transparent border-b border-black/5 transition-all duration-300">
   <div class="container h-20 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="relative z-50 font-secondary font-extrabold text-2xl text-navy tracking-tighter shadow-none">
-      <span class="text-blue">DP</span>S
+      <span class="text-blue">DPS</span>
     </a>
 
     <!-- Botón Menú Móvil -->
-    <button id="mobile-menu-btn" class="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center items-center gap-1.5 focus:outline-none" aria-label="Abrir menú">
-      <span class="w-6 h-0.5 bg-navy rounded-full transition-all duration-300 origin-center"></span>
-      <span class="w-6 h-0.5 bg-navy rounded-full transition-all duration-300 origin-center"></span>
-      <span class="w-6 h-0.5 bg-navy rounded-full transition-all duration-300 origin-center"></span>
+    <button id="mobile-menu-btn" class="md:hidden z-50">
+      <Menu id="icon-menu" class="w-7 h-7 text-white" />
+      <X id="icon-close" class="w-7 h-7 text-white hidden" />
     </button>
 
     <!-- Navegación y Botón (Mobile First) -->
     <nav id="mobile-menu" class="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl flex flex-col justify-center items-center gap-8 pt-20 px-6 -translate-y-full opacity-0 pointer-events-none transition-all duration-400 ease-in-out md:static md:z-auto md:bg-transparent md:backdrop-blur-none md:flex-row md:justify-end md:gap-8 md:pt-0 md:px-0 md:translate-y-0 md:opacity-100 md:pointer-events-auto">
       
       <ul class="flex flex-col md:flex-row items-center gap-6 md:gap-8 w-full md:w-auto text-center">
-        <li><a href="#services" class="text-navy hover:text-blue font-medium text-2xl md:text-base transition-colors menu-link">Servicios</a></li>
-        <li><a href="#benefits" class="text-navy hover:text-blue font-medium text-2xl md:text-base transition-colors menu-link">Beneficios</a></li>
-        <li><a href="#reviews" class="text-navy hover:text-blue font-medium text-2xl md:text-base transition-colors menu-link">Testimonios</a></li>
+        <li><a href="#services" class="text-navy hover:text-blue font-medium text-2xl md:text-base transition-colors menu-link">{t('nav.services')}</a></li>
+        <li><a href="#benefits" class="text-navy hover:text-blue font-medium text-2xl md:text-base transition-colors menu-link">{t('nav.benefits')}</a></li>
+        <li><a href="#reviews" class="text-navy hover:text-blue font-medium text-2xl md:text-base transition-colors menu-link">{t('nav.reviews')}</a></li>
       </ul>
       
-      <div class="mt-4 md:mt-0 w-full max-w-[300px] md:max-w-none md:w-auto flex justify-center">
-        <a href="#contact" class="btn btn-accent w-full md:w-auto px-8 py-3.5 md:py-2.5 text-lg md:text-base menu-link">Aplicar Ahora</a>
+      <div class="mt-4 md:mt-0 w-full max-w-[300px] md:max-w-none md:w-auto flex flex-col md:flex-row items-center justify-center gap-4">
+        <a href={lang === 'en' ? '/es' : '/'} class="text-sm font-semibold text-navy/70 hover:text-blue border border-navy/20 px-3 py-1 rounded-full transition-colors order-2 md:order-1">
+          {lang === 'en' ? 'ES' : 'EN'}
+        </a>
+        <a href="#contact" class="btn btn-accent w-full md:w-auto px-8 py-3.5 md:py-2.5 text-lg md:text-base menu-link order-1 md:order-2">{t('nav.apply')}</a>
       </div>
       
     </nav>
@@ -60,6 +68,8 @@
         lines[2].classList.remove('-translate-y-2', '-rotate-45');
       }
     }
+
+    updateMenuColor();
   };
 
   // Event listener para el botón
@@ -92,4 +102,33 @@ window.addEventListener("scroll", () => {
     navbar.classList.add("bg-transparent");
   }
 });
+
+const menuIcon = document.getElementById("icon-menu");
+const closeIcon = document.getElementById("icon-close");
+
+const updateMenuColor = () => {
+  if (isMenuOpen) {
+    // menú abierto = X azul
+    menuIcon?.classList.add("hidden");
+
+    closeIcon?.classList.remove("hidden", "text-white", "text-navy");
+    closeIcon?.classList.add("text-blue");
+
+  } else {
+    // menú cerrado
+    closeIcon?.classList.add("hidden");
+
+    menuIcon?.classList.remove("hidden", "text-blue");
+
+    if (window.scrollY > 100) {
+      // scroll activo
+      menuIcon?.classList.remove("text-white");
+      menuIcon?.classList.add("text-navy");
+    } else {
+      // estado inicial
+      menuIcon?.classList.remove("text-navy");
+      menuIcon?.classList.add("text-white");
+    }
+  }
+};
 </script>
