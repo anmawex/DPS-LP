@@ -1,131 +1,62 @@
 ---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getServicesData } from '../../data/services';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const servicesList = getServicesData(t);
 ---
 
-<section id="services" class="services">
+<section id="services" class="bg-[#F9F9F9] py-16 lg:py-32">
   <div class="container">
-    <div class="section-header">
-      <span class="text-accent">Nuestros Servicios</span>
-      <h2>Soluciones Financieras a tu Medida</h2>
-      <p>Ya sea que busques el auto de tus sueños o mejorar las condiciones de tu hipoteca, tenemos el plan perfecto para ti.</p>
+    <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+      <span class="uppercase font-bold text-sm tracking-widest text-accent block mb-2">{t('nav.services')}</span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl text-navy mb-4 font-secondary font-extrabold leading-tight">{t('services.heading.main')}</h2>
+      <p class="text-gray-600 text-lg">{t('services.subheading')}</p>
     </div>
 
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="card-icon">🚗</div>
-        <h3>Préstamos Automotrices</h3>
-        <p>Obtén financiamiento para autos nuevos o usados con tasas preferenciales y plazos flexibles de hasta 72 meses.</p>
-        <ul class="card-features">
-          <li>✓ Tasas desde 4.5% APR</li>
-          <li>✓ Sin penalización por pago anticipado</li>
-          <li>✓ Aprobación en minutos</li>
-        </ul>
-        <a href="#contact" class="link-btn">Saber más →</a>
-      </div>
+    <!-- Mobile First Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      {servicesList.map(service => (
+        <div 
+          class={`relative group overflow-hidden p-8 rounded-3xl min-h-[300px] flex flex-col justify-end transition-all duration-500 hover:-translate-y-2 border ${service.featured ? 'border-2 border-blue shadow-2xl shadow-blue/20' : 'border-gray-100 shadow-xl shadow-black/5'}`}
+        >
+          {/* Background Image Container */}
+          <div 
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+            style={`background-image: url('${service.bgImage}');`}
+          ></div>
+          
+          {/* Overlay - Darker for readability */}
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent"></div>
 
-      <div class="service-card featured">
-        <div class="card-icon">🏠</div>
-        <h3>Refinanciamiento Hipotecario</h3>
-        <p>Reduce tus mensualidades o extrae capital de tu propiedad para otros proyectos con nuestras opciones de refinanciamiento.</p>
-        <ul class="card-features">
-          <li>✓ Reduce tu tasa de interés</li>
-          <li>✓ Consolida deudas</li>
-          <li>✓ Mejora tu flujo de caja</li>
-        </ul>
-        <a href="#contact" class="link-btn">Saber más →</a>
-      </div>
+          {/* Content */}
+          <div class="relative z-10">
+            {service.featured && (
+              <div class="absolute -top-16 right-0 bg-blue text-white px-4 py-1 rounded-full text-xs font-bold shadow-md tracking-wide">
+                {lang === 'en' ? 'Most Popular' : 'Más Popular'}
+              </div>
+            )}
+
+            {/* <div class="text-4xl mb-4 text-white">
+              {service.icon}
+            </div> */}
+            
+            <h3 class="text-xl sm:text-2xl text-white font-bold font-secondary mb-2 drop-shadow-md">
+              {service.title}
+            </h3>
+            
+            <p class="text-gray-200 text-sm sm:text-base mb-6 leading-relaxed max-w-sm">
+              {service.desc}
+            </p>
+            
+            <a href="#contact" class="inline-flex items-center gap-2 font-semibold text-blue-400 hover:text-white transition-colors group/link">
+              {t('services.link')}
+            </a>
+          </div>
+
+        </div>
+      ))}
     </div>
   </div>
 </section>
-
-<style>
-  .services {
-    background-color: var(--color-bg-light);
-  }
-
-  .section-header {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto var(--spacing-lg);
-  }
-
-  .section-header span {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-  }
-
-  .section-header h2 {
-    font-size: 2.5rem;
-    color: var(--color-navy);
-    margin: var(--spacing-xs) 0 var(--spacing-sm);
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-md);
-  }
-
-  .service-card {
-    background: var(--color-white);
-    padding: var(--spacing-md);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: transform var(--transition-normal);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-  }
-
-  .service-card:hover {
-    transform: translateY(-10px);
-  }
-
-  .service-card.featured {
-    border: 2px solid var(--color-blue);
-    position: relative;
-  }
-
-  .service-card.featured::after {
-    content: 'Más popular';
-    position: absolute;
-    top: -12px;
-    right: 20px;
-    background: var(--color-blue);
-    color: var(--color-white);
-    padding: 4px 12px;
-    border-radius: 50px;
-    font-size: 0.75rem;
-    font-weight: 600;
-  }
-
-  .card-icon {
-    font-size: 3rem;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .service-card h3 {
-    color: var(--color-navy);
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .card-features {
-    margin: var(--spacing-sm) 0 var(--spacing-md);
-  }
-
-  .card-features li {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-    margin-bottom: 0.5rem;
-  }
-
-  .link-btn {
-    font-weight: 600;
-    color: var(--color-blue);
-  }
-
-  @media (max-width: 768px) {
-    .section-header h2 {
-      font-size: 2rem;
-    }
-  }
-</style>

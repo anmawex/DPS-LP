@@ -12,6 +12,7 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.calculators': 'Calculators',
     'nav.apply': 'Apply Now',
+    
     'hero.badge': 'Loans & Refinancing',
     'hero.titlePart1': 'Power your dreams with ',
     'hero.titlePart2': 'Smart Financing',
@@ -21,6 +22,36 @@ export const ui = {
     'hero.trust': 'Online Approval',
     'hero.verified': 'Verified ✓',
     'hero.rateLabel': 'Interest Rate',
+
+    'services.heading.main': 'Financial Solutions Tailored To You',
+    'services.subheading': 'Whether you are looking for your dream car or looking to improve your mortgage conditions, we have the perfect plan for you.',
+    'services.link': 'Learn more →',
+    
+    'services.title.autoLoan': 'Auto Loan Refinance',
+    'services.desc.autoLoan': 'Take advantage of lower interest rates and flexible repayment terms.',
+    'services.feat.autoLoan.0': 'Lower rates',
+    'services.feat.autoLoan.1': 'Fast approval',
+    'services.feat.autoLoan.2': 'No penalties',
+    'services.feat.autoLoan.3': 'Flexible terms',
+
+    'services.title.coverage': 'Vehicle Coverage Review',
+    'services.desc.coverage': 'Understand your current plan and identify verified protection.',
+    'services.feat.coverage.0': 'Coverage analysis',
+    'services.feat.coverage.1': 'Verified protection',
+    'services.feat.coverage.2': 'Policy clarity',
+
+    'services.title.homeRefinance': 'Home Refinance',
+    'services.desc.homeRefinance': 'Reduce payments, improve rates, or access equity.',
+    'services.feat.homeRefinance.0': 'Lower payments',
+    'services.feat.homeRefinance.1': 'Better rates',
+    'services.feat.homeRefinance.2': 'Equity access',
+    'services.feat.homeRefinance.3': 'Flexible options',
+
+    'services.title.credit': 'Credit Consultation',
+    'services.desc.credit': 'Improve credit and build stronger finances.',
+    'services.feat.credit.0': 'Credit improvement',
+    'services.feat.credit.1': 'Debt reduction',
+    'services.feat.credit.2': 'Financial planning',
   },
   es: {
     'nav.services': 'Servicios',
@@ -28,6 +59,7 @@ export const ui = {
     'nav.contact': 'Contacto',
     'nav.calculators': 'Calculadoras',
     'nav.apply': 'Aplicar Ahora',
+    
     'hero.badge': 'Préstamos & Refinanciamiento',
     'hero.titlePart1': 'Impulsa tus sueños con ',
     'hero.titlePart2': 'Financiamiento Inteligente',
@@ -37,5 +69,35 @@ export const ui = {
     'hero.trust': 'Aprobación En Línea',
     'hero.verified': 'Verificado ✓',
     'hero.rateLabel': 'Tasa Interés',
+
+    'services.heading.main': 'Soluciones Financieras a tu Medida',
+    'services.subheading': 'Ya sea que busques el auto de tus sueños o mejorar las condiciones de tu hipoteca, tenemos el plan perfecto para ti.',
+    'services.link': 'Saber más →',
+    
+    'services.title.autoLoan': 'Refinanciamiento de Auto',
+    'services.desc.autoLoan': 'Aprovecha tasas de interés más bajas y plazos de pago flexibles.',
+    'services.feat.autoLoan.0': 'Tasas más bajas',
+    'services.feat.autoLoan.1': 'Aprobación rápida',
+    'services.feat.autoLoan.2': 'Sin penalizaciones',
+    'services.feat.autoLoan.3': 'Plazos flexibles',
+
+    'services.title.coverage': 'Revisión de Cobertura Vehicular',
+    'services.desc.coverage': 'Entiende tu plan actual e identifica protección verificada.',
+    'services.feat.coverage.0': 'Análisis de cobertura',
+    'services.feat.coverage.1': 'Protección verificada',
+    'services.feat.coverage.2': 'Claridad de póliza',
+
+    'services.title.homeRefinance': 'Refinanciación de la vivienda',
+    'services.desc.homeRefinance': 'Reducir los pagos, mejorar las tasas de interés o acceder al valor acumulado de la vivienda.',
+    'services.feat.homeRefinance.0': 'Pagos más bajos',
+    'services.feat.homeRefinance.1': 'Mejores tarifas',
+    'services.feat.homeRefinance.2': 'Acceso a la propiedad',
+    'services.feat.homeRefinance.3': 'Opciones flexibles',
+
+    'services.title.credit': 'Consulta de Crédito',
+    'services.desc.credit': 'Mejora tu crédito y construye finanzas más sólidas.',
+    'services.feat.credit.0': 'Mejora de crédito',
+    'services.feat.credit.1': 'Reducción de deudas',
+    'services.feat.credit.2': 'Planificación financiera',
   },
 } as const;
