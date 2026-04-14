@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-astro";
 
 ---
 
-<header id="navbar" class="fixed w-full top-0 z-50 bg-transparent border-b border-black/5 transition-all duration-300">
+<header id="navbar" class="fixed w-full top-0 z-50 bg-transparent transition-all duration-300">
   <div class="container h-20 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="relative z-50 font-secondary font-extrabold text-2xl text-navy tracking-tighter shadow-none">
@@ -32,7 +32,7 @@ import { Menu, X } from "lucide-astro";
       </ul>
       
       <div class="mt-4 lg:mt-0 w-full max-w-[300px] lg:max-w-none lg:w-auto flex flex-col lg:flex-row items-center justify-center gap-4">
-        <a href={lang === 'en' ? '/es' : '/'} class="nav-link text-sm font-semibold text-white/70 hover:text-white border border-white/20 px-3 py-1 rounded-full transition-colors order-2 lg:order-1">
+        <a href={lang === 'en' ? '/es' : '/'} class="nav-link text-blue lg:text-white text-sm font-semibold hover:text-white border border-gray-400 px-3 py-1 rounded-full transition-colors order-2 lg:order-1">
           {lang === 'en' ? 'ES' : 'EN'}
         </a>
         <!-- <a href="#contact" class="btn btn-accent w-full lg:w-auto px-8 py-3.5 lg:py-2.5 text-lg lg:text-base menu-link order-1 lg:order-2">{t('nav.apply')}</a> -->
