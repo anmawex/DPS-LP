@@ -1,0 +1,106 @@
+---
+---
+
+<section id="process" class="process">
+  <div class="container">
+    <div class="section-header">
+      <span class="text-accent">Proceso Sencillo</span>
+      <h2>Obtén tu aprobación en 3 pasos</h2>
+      <p>Hemos simplificado el camino para que te enfoques en lo que realmente importa.</p>
+    </div>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Solicitud en Línea</h3>
+        <p>Completa nuestro formulario simplificado con tus datos básicos. Solo te tomará 5 minutos.</p>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Análisis y Oferta</h3>
+        <p>Nuestro algoritmo analiza tu perfil y te ofrece las mejores opciones disponibles casi al instante.</p>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Recibe tus Fondos</h3>
+        <p>Firma digitalmente y recibe el desembolso o la confirmación de tu refinanciamiento en tiempo récord.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    background-color: var(--color-white);
+    padding-bottom: var(--spacing-xl);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .process-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    position: relative;
+  }
+
+  .step {
+    flex: 1;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .step-number {
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0 auto var(--spacing-sm);
+    box-shadow: 0 0 0 10px rgba(10, 61, 98, 0.1);
+  }
+
+  .step h3 {
+    color: var(--color-navy);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .step p {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+  }
+
+  .step-connector {
+    flex: 0.5;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-navy) 50%, transparent 50%);
+    background-size: 10px 100%;
+    margin-top: 30px;
+    opacity: 0.2;
+  }
+
+  @media (max-width: 768px) {
+    .process-steps {
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+    .step-connector {
+      display: none;
+    }
+  }
+</style>

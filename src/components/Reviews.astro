@@ -1,0 +1,100 @@
+---
+---
+
+<section id="reviews" class="reviews">
+  <div class="container">
+    <div class="section-header">
+      <span class="text-accent">Testimonios</span>
+      <h2>Lo que dicen nuestros clientes</h2>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>"El proceso para refinanciar mi casa fue increíblemente sencillo. Bajé mi tasa de interés y ahora ahorro $300 al mes. ¡Altamente recomendados!"</p>
+        <div class="reviewer">
+          <strong>Carlos Mendoza</strong>
+          <span>Refinanciamiento Hipotecario</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>"Conseguí el préstamo para mi auto nuevo en menos de 24 horas. El equipo fue muy profesional y las tasas fueron mucho mejores que en el concesionario."</p>
+        <div class="reviewer">
+          <strong>Lucía Torres</strong>
+          <span>Préstamo Automotriz</span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p>"Excelente servicio al cliente. Me explicaron cada paso del proceso y no hubo cargos ocultos. Transparencia total desde el inicio."</p>
+        <div class="reviewer">
+          <strong>Roberto Silva</strong>
+          <span>Préstamo Automotriz</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews {
+    background-color: var(--color-bg-light);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .review-card {
+    background: var(--color-white);
+    padding: var(--spacing-md);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+
+  .review-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .stars {
+    color: #f1c40f;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.9rem;
+  }
+
+  .review-card p {
+    font-size: 1rem;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+    font-style: italic;
+  }
+
+  .reviewer {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #eee;
+    padding-top: var(--spacing-sm);
+  }
+
+  .reviewer strong {
+    color: var(--color-navy);
+    font-size: 1rem;
+  }
+
+  .reviewer span {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+  }
+</style>

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Brand Colors */
+  --color-navy: #0A3D62;
+  --color-blue: #2E86DE;
+  --color-accent: #E74C3C;
+  
+  /* Fonts */
+  --font-primary: "Inter", system-ui, sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+
+  /* Spacing aliases if needed, but Tailwind 4 is very flexible */
+}
+
+/* Base resets & utilities */
+@layer base {
+  body {
+    @apply font-primary text-gray-800 bg-white leading-relaxed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-secondary font-bold leading-tight;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-block px-6 py-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 text-center active:scale-95;
+  }
+
+  .btn-primary {
+    @apply bg-blue text-white hover:bg-blue/90 shadow-lg shadow-blue/20;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white hover:bg-accent/90 shadow-lg shadow-accent/20;
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue to-green-400;
+  }
+}
