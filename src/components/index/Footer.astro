@@ -1,26 +1,27 @@
 ---
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Logo from "../../assets/isologo.svg"
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-navy pt-20 pb-10 text-white relative overflow-hidden">
+<footer class="bg-navy pt-0 pb-10 text-white relative overflow-hidden">
   <!-- Subtle decorative element -->
   <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue to-accent opacity-50"></div>
   
   <div class="container mx-auto px-4 relative z-10">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
       <!-- Brand Profile -->
-      <div class="space-y-6">
+      <div class="flex flex-col items-center text-center">
         <a href="/" class="text-2xl font-secondary font-black tracking-tighter inline-block hover:opacity-90 transition-opacity">
-          <span class="text-blue">MAJESTIC</span>MASS
+          <Logo class="h-44 w-44 text-white" />
         </a>
+
         <p class="text-white/60 leading-relaxed text-sm max-w-xs">
           {t('footer.tagline')}
         </p>
-        <!-- Social placeholders could go here -->
       </div>
 
       <!-- Services -->
@@ -97,7 +98,7 @@ const year = new Date().getFullYear();
     <!-- Copyright Area -->
     <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
       <p class="text-white/40 text-xs text-center sm:text-left">
-        &copy; {year} <span class="text-white/60 font-medium">Majestic Mass</span>. {t('footer.rights')}
+        &copy; {year} <span class="text-white/60 font-medium">DRIVE POINT SOLUTIONS</span>. {t('footer.rights')}
       </p>
       
       <div class="flex items-center gap-2">
