@@ -1,123 +1,110 @@
 ---
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer">
-  <div class="container container-footer">
-    <div class="footer-brand">
-      <a href="/" class="logo">
-        <span class="logo-accent">MAJESTIC</span>MASS
-      </a>
-      <p>Empoderando tu futuro financiero con transparencia y rapidez.</p>
+<footer class="bg-navy pt-20 pb-10 text-white relative overflow-hidden">
+  <!-- Subtle decorative element -->
+  <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue to-accent opacity-50"></div>
+  
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+      <!-- Brand Profile -->
+      <div class="space-y-6">
+        <a href="/" class="text-2xl font-secondary font-black tracking-tighter inline-block hover:opacity-90 transition-opacity">
+          <span class="text-blue">MAJESTIC</span>MASS
+        </a>
+        <p class="text-white/60 leading-relaxed text-sm max-w-xs">
+          {t('footer.tagline')}
+        </p>
+        <!-- Social placeholders could go here -->
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h4 class="text-white font-bold text-lg mb-8 relative inline-block">
+          {t('footer.services')}
+          <span class="absolute -bottom-2 left-0 w-8 h-1 bg-blue rounded-full"></span>
+        </h4>
+        <ul class="space-y-4">
+          <li>
+            <a href="#services" class="text-white/50 hover:text-blue hover:translate-x-1 transition-all duration-200 inline-block text-sm">
+              {t('footer.link.autos')}
+            </a>
+          </li>
+          <li>
+            <a href="#services" class="text-white/50 hover:text-blue hover:translate-x-1 transition-all duration-200 inline-block text-sm">
+              {t('footer.link.refinance')}
+            </a>
+          </li>
+          <li>
+            <a href="/seguros" class="text-white/50 hover:text-blue hover:translate-x-1 transition-all duration-200 inline-block text-sm">
+              {t('footer.link.insurance')}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h4 class="text-white font-bold text-lg mb-8 relative inline-block">
+          {t('footer.company')}
+          <span class="absolute -bottom-2 left-0 w-8 h-1 bg-blue rounded-full"></span>
+        </h4>
+        <ul class="space-y-4">
+          <li>
+            <a href="/nosotros" class="text-white/50 hover:text-blue hover:translate-x-1 transition-all duration-200 inline-block text-sm">
+              {t('footer.link.about')}
+            </a>
+          </li>
+          <li>
+            <a href="/blog" class="text-white/50 hover:text-blue hover:translate-x-1 transition-all duration-200 inline-block text-sm">
+              {t('footer.link.blog')}
+            </a>
+          </li>
+          <li>
+            <a href="#contact" class="text-white/50 hover:text-blue hover:translate-x-1 transition-all duration-200 inline-block text-sm">
+              {t('footer.link.contact')}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="text-white font-bold text-lg mb-8 relative inline-block">
+          {t('footer.legal')}
+          <span class="absolute -bottom-2 left-0 w-8 h-1 bg-blue rounded-full"></span>
+        </h4>
+        <ul class="space-y-4">
+          <li>
+            <a href="/privacidad" class="text-white/50 hover:text-blue hover:translate-x-1 transition-all duration-200 inline-block text-sm">
+              {t('footer.link.privacy')}
+            </a>
+          </li>
+          <li>
+            <a href="/terminos" class="text-white/50 hover:text-blue hover:translate-x-1 transition-all duration-200 inline-block text-sm">
+              {t('footer.link.terms')}
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div class="footer-links">
-      <div class="link-group">
-        <h4>Servicios</h4>
-        <ul>
-          <li><a href="#services">Autos</a></li>
-          <li><a href="#services">Refinanciamiento</a></li>
-          <li><a href="/seguros">Seguros</a></li>
-        </ul>
+    <!-- Copyright Area -->
+    <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
+      <p class="text-white/40 text-xs text-center sm:text-left">
+        &copy; {year} <span class="text-white/60 font-medium">Majestic Mass</span>. {t('footer.rights')}
+      </p>
+      
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+        <span class="text-[10px] uppercase tracking-widest text-white/30 font-bold">Systems Operational</span>
       </div>
-      <div class="link-group">
-        <h4>Compañía</h4>
-        <ul>
-          <li><a href="/nosotros">Nosotros</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="#contact">Contacto</a></li>
-        </ul>
-      </div>
-      <div class="link-group">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="/privacidad">Privacidad</a></li>
-          <li><a href="/terminos">Términos</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  
-  <div class="footer-bottom">
-    <div class="container">
-      <p>&copy; {year} Majestic Mass. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>
 
-<style>
-  .footer {
-    background-color: #051a2b;
-    color: var(--color-white);
-    padding-top: var(--spacing-lg);
-  }
-
-  .container-footer {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--spacing-lg);
-    padding-bottom: var(--spacing-lg);
-  }
-
-  .footer-brand {
-    max-width: 300px;
-  }
-
-  .logo {
-    font-family: var(--font-secondary);
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: var(--color-white);
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .logo-accent {
-    color: var(--color-blue);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: var(--spacing-xl);
-  }
-
-  .link-group h4 {
-    margin-bottom: var(--spacing-sm);
-    font-size: 1rem;
-    color: var(--color-blue);
-  }
-
-  .link-group ul li {
-    margin-bottom: 0.5rem;
-  }
-
-  .link-group ul li a {
-    opacity: 0.7;
-    font-size: 0.9rem;
-    transition: opacity 0.3s ease;
-  }
-
-  .link-group ul li a:hover {
-    opacity: 1;
-  }
-
-  .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: var(--spacing-sm) 0;
-    text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.5;
-  }
-
-  @media (max-width: 768px) {
-    .container-footer {
-      flex-direction: column;
-    }
-    .footer-links {
-      flex-wrap: wrap;
-      gap: var(--spacing-md);
-    }
-  }
-</style>
