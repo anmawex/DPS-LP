@@ -52,6 +52,13 @@ export const ui = {
     'services.feat.credit.0': 'Credit improvement',
     'services.feat.credit.1': 'Debt reduction',
     'services.feat.credit.2': 'Financial planning',
+
+    'contact.title': 'Ready to Improve Your Financial Future?',
+    'contact.description': 'Join DRIVE POINT SOLUTIONS and take the first step today towards a more solid and promising economic stability.',
+    'contact.btnStart': 'Get Started Now',
+    'contact.btnMore': 'Learn More',
+    'contact.office': 'Main Office',
+    'contact.support': 'Customer Service — 24/7',
   },
   es: {
     'nav.services': 'Servicios',
@@ -99,5 +106,12 @@ export const ui = {
     'services.feat.credit.0': 'Mejora de crédito',
     'services.feat.credit.1': 'Reducción de deudas',
     'services.feat.credit.2': 'Planificación financiera',
+
+    'contact.title': '¿Preparado para Mejorar Tu Futuro Financiero?',
+    'contact.description': 'Forma parte de DRIVE POINT SOLUTIONS y da hoy el primer paso hacia una estabilidad económica más sólida y prometedora.',
+    'contact.btnStart': 'Empieza Ahora',
+    'contact.btnMore': 'Conoce Más',
+    'contact.office': 'Oficina Principal',
+    'contact.support': 'Atención al Cliente — 24/7',
   },
 } as const;
