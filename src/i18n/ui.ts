@@ -73,6 +73,9 @@ export const ui = {
     'footer.link.contact': 'Contact',
     'footer.link.privacy': 'Privacy',
     'footer.link.terms': 'Terms',
+
+    'servicesPage.title': 'Our Financial Services',
+    'servicesPage.description': 'Comprehensive solutions for your vehicle and mortgage needs.',
   },
   es: {
     'nav.services': 'Servicios',
@@ -141,5 +144,8 @@ export const ui = {
     'footer.link.contact': 'Contacto',
     'footer.link.privacy': 'Privacidad',
     'footer.link.terms': 'Términos',
+
+    'servicesPage.title': 'Nuestros Servicios Financieros',
+    'servicesPage.description': 'Soluciones integrales para tus necesidades vehiculares e hipotecarias.',
   },
 } as const;

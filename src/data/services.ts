@@ -4,7 +4,7 @@ export const getServicesData = (t: any) => [
     featured: false,
     title: t('services.title.autoLoan'),
     desc: t('services.desc.autoLoan'),
-    bgImage: './public/auto-loan.jpg',
+    bgImage: '/auto-loan.jpg',
     features: [
       t('services.feat.autoLoan.0'),
       t('services.feat.autoLoan.1'),
@@ -17,7 +17,7 @@ export const getServicesData = (t: any) => [
     featured: false,
     title: t('services.title.coverage'),
     desc: t('services.desc.coverage'),
-    bgImage: './public/coverage.jpg',
+    bgImage: '/coverage.jpg',
     features: [
       t('services.feat.coverage.0'),
       t('services.feat.coverage.1'),
@@ -29,7 +29,7 @@ export const getServicesData = (t: any) => [
     featured: false,
     title: t('services.title.homeRefinance'),
     desc: t('services.desc.homeRefinance'),
-    bgImage: './public/home-refinance.jpg',
+    bgImage: '/home-refinance.jpg',
     features: [
       t('services.feat.homeRefinance.0'),
       t('services.feat.homeRefinance.1'),
@@ -42,7 +42,7 @@ export const getServicesData = (t: any) => [
     featured: false,
     title: t('services.title.credit'),
     desc: t('services.desc.credit'),
-    bgImage: './public/credit.jpg',
+    bgImage: '/credit.jpg',
     features: [
       t('services.feat.credit.0'),
       t('services.feat.credit.1'),

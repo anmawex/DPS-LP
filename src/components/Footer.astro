@@ -1,6 +1,6 @@
 ---
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
-import Logo from "../../assets/isologo.svg"
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Logo from "../assets/isologo.svg"
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,7 +15,7 @@ const year = new Date().getFullYear();
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
       <!-- Brand Profile -->
       <div class="flex flex-col items-center text-center">
-        <a href="/" class="text-2xl font-secondary font-black tracking-tighter inline-block hover:opacity-90 transition-opacity">
+        <a href={lang === 'en' ? '/' : '/es'} class="text-2xl font-secondary font-black tracking-tighter inline-block hover:opacity-90 transition-opacity">
           <Logo class="h-44 w-44 text-white" />
         </a>
 
