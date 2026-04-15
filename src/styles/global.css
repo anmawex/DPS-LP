@@ -44,15 +44,15 @@
 
    /* NAVBAR SCROLL STATE */
   #navbar.scrolled .nav-link {
-    @apply !text-blue;
+    @apply !text-navy;
   }
 
   #navbar.scrolled .logo-text {
-    @apply text-blue;
+    @apply text-navy;
   }
 
   #navbar.scrolled #mobile-menu-btn {
-    @apply text-blue;
+    @apply text-navy;
   }
 }
 

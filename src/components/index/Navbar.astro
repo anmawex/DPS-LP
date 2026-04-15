@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import Logo from "../../assets/DPS-logo.svg"
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,7 +12,8 @@ import { Menu, X } from "lucide-astro";
   <div class="container h-20 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="relative z-50 font-secondary font-extrabold text-2xl text-navy tracking-tighter shadow-none">
-      <span class="text-blue">DPS</span>
+      <!-- <span class="text-blue">DPS</span> -->
+       <Logo id="logo-navbar" class="w-24 h-24 text-white/85" />
     </a>
 
     <!-- Botón Menú Móvil -->
@@ -24,15 +26,15 @@ import { Menu, X } from "lucide-astro";
     <nav id="mobile-menu" class="fixed inset-0 z-40 bg-white/98 backdrop-blur-2xl flex flex-col justify-center items-center gap-8 pt-20 px-6 -translate-y-full opacity-0 pointer-events-none transition-all duration-400 ease-in-out lg:static lg:z-auto lg:bg-transparent lg:backdrop-blur-none lg:flex-row lg:justify-end lg:gap-8 lg:pt-0 lg:px-0 lg:translate-y-0 lg:opacity-100 lg:pointer-events-auto">
       
       <ul class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8 w-full lg:w-auto text-center">
-        <li><a href="#services" class="nav-link text-blue lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.services')}</a></li>
-        <li><a href="#benefits" class="nav-link text-blue lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.benefits')}</a></li>
+        <li><a href="#services" class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.services')}</a></li>
+        <li><a href="#benefits" class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.benefits')}</a></li>
         <!-- <li><a href="#reviews" class="text-navy hover:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.reviews')}</a></li> -->
-        <li><a href="#benefits" class="nav-link text-blue lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.calculators')}</a></li>
-        <li><a href="#benefits" class="nav-link text-blue lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.contact')}</a></li>
+        <li><a href="#benefits" class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.calculators')}</a></li>
+        <li><a href="#benefits" class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.contact')}</a></li>
       </ul>
       
       <div class="mt-4 lg:mt-0 w-full max-w-[300px] lg:max-w-none lg:w-auto flex flex-col lg:flex-row items-center justify-center gap-4">
-        <a href={lang === 'en' ? '/es' : '/'} class="nav-link text-blue lg:text-white text-sm font-semibold hover:text-white border border-gray-400 px-3 py-1 rounded-full transition-colors order-2 lg:order-1">
+        <a href={lang === 'en' ? '/es' : '/'} class="nav-link text-navy lg:text-white text-sm font-semibold hover:text-white border border-gray-400 px-3 py-1 rounded-full transition-colors order-2 lg:order-1">
           {lang === 'en' ? 'ES' : 'EN'}
         </a>
         <!-- <a href="#contact" class="btn btn-accent w-full lg:w-auto px-8 py-3.5 lg:py-2.5 text-lg lg:text-base menu-link order-1 lg:order-2">{t('nav.apply')}</a> -->
@@ -94,14 +96,20 @@ import { Menu, X } from "lucide-astro";
   });
 
 const navbar = document.getElementById("navbar");
+const logo = document.getElementById("logo-navbar");
+
 
 window.addEventListener("scroll", () => {
   if (window.scrollY > 100) {
     navbar.classList.add("bg-white/95", "shadow-lg", "scrolled");
     navbar.classList.remove("bg-transparent");
+    logo.classList.add("text-navy");
+    logo.classList.remove("text-white/85")
   } else {
     navbar.classList.remove("bg-white/95", "shadow-lg", "scrolled");
     navbar.classList.add("bg-transparent");
+    logo.classList.add("text-white/85");
+    logo.classList.remove("text-navy")
   }
   updateMenuColor();
 });
@@ -115,21 +123,21 @@ const updateMenuColor = () => {
     menuIcon?.classList.add("hidden");
 
     closeIcon?.classList.remove("hidden", "text-white", "text-navy");
-    closeIcon?.classList.add("text-blue");
+    closeIcon?.classList.add("text-navy");
 
   } else {
     // menú cerrado
     closeIcon?.classList.add("hidden");
 
-    menuIcon?.classList.remove("hidden", "text-blue");
+    menuIcon?.classList.remove("hidden", "text-navy");
 
     if (window.scrollY > 100) {
       // scroll activo
       menuIcon?.classList.remove("text-white");
-      menuIcon?.classList.add("text-blue");
+      menuIcon?.classList.add("text-navy");
     } else {
       // estado inicial
-      menuIcon?.classList.remove("text-blue");
+      menuIcon?.classList.remove("text-navy");
       menuIcon?.classList.add("text-white");
     }
   }
