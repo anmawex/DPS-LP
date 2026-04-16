@@ -139,6 +139,38 @@
   .result-card--blue .result-value {
     @apply text-blue;
   }
+
+  /* CONTACT FORM */
+  .contact-input-group {
+    @apply flex flex-col gap-2;
+  }
+
+  .contact-input-label {
+    @apply text-sm font-semibold text-navy/70 leading-tight;
+  }
+
+  .contact-input-wrapper {
+    @apply flex items-center bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden
+           focus-within:border-blue focus-within:ring-2 focus-within:ring-blue/10
+           transition-all duration-200;
+  }
+
+  .contact-textarea-wrapper {
+    @apply items-start;
+  }
+
+  .contact-input-icon {
+    @apply px-4 py-4 text-navy/30 shrink-0;
+  }
+
+  .contact-input {
+    @apply flex-1 pr-4 py-4 bg-transparent text-navy font-medium text-sm outline-none
+           placeholder:text-gray-300 w-full;
+  }
+
+  .contact-select {
+    @apply cursor-pointer text-navy/70;
+  }
 }
 
 @layer utilities {

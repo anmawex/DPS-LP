@@ -1,0 +1,237 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { Mail, Phone, MapPin, Clock, Send, User, MessageSquare, Car } from 'lucide-astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<MainLayout title={`${t('contactPage.title')} | DRIVE POINT SOLUTIONS`}>
+  <Navbar />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="pt-48 pb-16 lg:pt-72 lg:pb-24 relative overflow-hidden bg-[url('/contact-hero.jpg')] bg-cover bg-center bg-no-repeat">
+      <div class="absolute inset-0 bg-black/75"></div>
+      <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue/10 to-transparent pointer-events-none"></div>
+
+      <div class="container relative z-10">
+        <div class="max-w-2xl">
+          <h1 class="text-4xl lg:text-6xl font-secondary font-black text-white mb-6 tracking-tighter leading-tight">
+            {t('contactPage.title')}
+          </h1>
+          <p class="text-white/80 text-lg lg:text-xl leading-relaxed font-light max-w-xl">
+            {t('contactPage.description')}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 lg:py-28 bg-[#F7F8FA]">
+      <div class="container">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+
+          <!-- Left: Info Panel -->
+          <div class="lg:col-span-2 space-y-6">
+            <div class="bg-navy rounded-[32px] p-8 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-40 h-40 bg-blue/10 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="absolute bottom-0 left-0 w-32 h-32 bg-blue/5 rounded-full blur-xl pointer-events-none"></div>
+
+              <div class="relative z-10">
+                <span class="text-blue text-xs font-bold uppercase tracking-widest block mb-3">{t('contactPage.info.title')}</span>
+                <h2 class="text-2xl font-secondary font-black text-white mb-8 leading-tight">
+                  {t('contactPage.form.title')}
+                </h2>
+
+                <!-- Info Items -->
+                <div class="space-y-6">
+                  <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-2xl bg-blue/20 border border-blue/30 flex items-center justify-center text-blue shrink-0 mt-0.5">
+                      <MapPin size={18} />
+                    </div>
+                    <div>
+                      <p class="text-white/50 text-xs font-bold uppercase tracking-wider mb-1">{t('contactPage.info.office')}</p>
+                      <p class="text-white font-medium leading-snug">Florida, United States</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-2xl bg-blue/20 border border-blue/30 flex items-center justify-center text-blue shrink-0 mt-0.5">
+                      <Phone size={18} />
+                    </div>
+                    <div>
+                      <p class="text-white/50 text-xs font-bold uppercase tracking-wider mb-1">{t('contactPage.info.support')}</p>
+                      <p class="text-white font-medium">+1 (555) 000-0000</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-2xl bg-blue/20 border border-blue/30 flex items-center justify-center text-blue shrink-0 mt-0.5">
+                      <Mail size={18} />
+                    </div>
+                    <div>
+                      <p class="text-white/50 text-xs font-bold uppercase tracking-wider mb-1">Email</p>
+                      <p class="text-white font-medium break-all">contact@drivepointsolutions.com</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-2xl bg-blue/20 border border-blue/30 flex items-center justify-center text-blue shrink-0 mt-0.5">
+                      <Clock size={18} />
+                    </div>
+                    <div>
+                      <p class="text-white/50 text-xs font-bold uppercase tracking-wider mb-1">{t('contactPage.info.hours')}</p>
+                      <p class="text-white font-medium">Lun – Sáb, 8 AM – 8 PM EST</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Form Card -->
+          <div class="lg:col-span-3 bg-white rounded-[32px] shadow-2xl shadow-black/5 border border-gray-100 overflow-hidden">
+            
+            <!-- Form Header -->
+            <div class="bg-navy px-8 py-7 lg:px-10">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-blue/20 border border-blue/30 flex items-center justify-center text-blue shrink-0">
+                  <Send size={18} />
+                </div>
+                <div>
+                  <h2 class="text-xl font-secondary font-black text-white leading-tight">{t('contactPage.form.title')}</h2>
+                  <p class="text-white/40 text-xs mt-0.5">{t('contactPage.form.required')}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Body -->
+            <div class="p-8 lg:p-10">
+              <form id="contactForm" class="space-y-6" novalidate>
+
+                <!-- Nombre & Email -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <!-- Nombre Completo -->
+                  <div class="contact-input-group">
+                    <label for="fullName" class="contact-input-label">
+                      {t('contactPage.form.fullName')} <span class="text-accent">*</span>
+                    </label>
+                    <div class="contact-input-wrapper">
+                      <span class="contact-input-icon"><User size={16} /></span>
+                      <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        required
+                        autocomplete="name"
+                        placeholder={t('contactPage.form.fullName.placeholder')}
+                        class="contact-input"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Correo -->
+                  <div class="contact-input-group">
+                    <label for="email" class="contact-input-label">
+                      {t('contactPage.form.email')} <span class="text-accent">*</span>
+                    </label>
+                    <div class="contact-input-wrapper">
+                      <span class="contact-input-icon"><Mail size={16} /></span>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        autocomplete="email"
+                        placeholder={t('contactPage.form.email.placeholder')}
+                        class="contact-input"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Teléfono & Servicio -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <!-- Teléfono -->
+                  <div class="contact-input-group">
+                    <label for="phone" class="contact-input-label">
+                      {t('contactPage.form.phone')}
+                    </label>
+                    <div class="contact-input-wrapper">
+                      <span class="contact-input-icon"><Phone size={16} /></span>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        autocomplete="tel"
+                        placeholder={t('contactPage.form.phone.placeholder')}
+                        class="contact-input"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Seleccionar Servicio -->
+                  <div class="contact-input-group">
+                    <label for="service" class="contact-input-label">
+                      {t('contactPage.form.service')}
+                    </label>
+                    <div class="contact-input-wrapper">
+                      <span class="contact-input-icon"><Car size={16} /></span>
+                      <select
+                        id="service"
+                        name="service"
+                        class="contact-input contact-select"
+                      >
+                        <option value="" disabled selected>{t('contactPage.form.service.placeholder')}</option>
+                        <option value="auto-loan">{t('contactPage.form.service.autoLoan')}</option>
+                        <option value="coverage">{t('contactPage.form.service.coverage')}</option>
+                        <option value="home-refi">{t('contactPage.form.service.homeRefi')}</option>
+                        <option value="credit">{t('contactPage.form.service.credit')}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mensaje -->
+                <div class="contact-input-group">
+                  <label for="message" class="contact-input-label">
+                    {t('contactPage.form.message')} <span class="text-accent">*</span>
+                  </label>
+                  <div class="contact-input-wrapper contact-textarea-wrapper">
+                    <span class="contact-input-icon self-start pt-4"><MessageSquare size={16} /></span>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={5}
+                      placeholder={t('contactPage.form.message.placeholder')}
+                      class="contact-input resize-none"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <!-- Enviar -->
+                <button
+                  type="submit"
+                  id="submitBtn"
+                  class="btn btn-primary w-full flex items-center justify-center gap-2 py-5 text-base font-bold"
+                >
+                  <Send size={18} />
+                  <span id="submitBtnText">{t('contactPage.form.submit')}</span>
+                </button>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</MainLayout>
