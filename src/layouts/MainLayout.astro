@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { getLangFromUrl } from '../i18n/utils';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title?: string;
@@ -38,6 +39,8 @@ const lang = getLangFromUrl(Astro.url);
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
+
+		<ClientRouter />
 	</head>
 	<body>
 		<slot />

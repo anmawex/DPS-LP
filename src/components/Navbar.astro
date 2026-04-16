@@ -27,10 +27,10 @@ import { Menu, X } from "lucide-astro";
       
       <ul class="flex flex-col lg:flex-row items-center gap-6 lg:gap-8 w-full lg:w-auto text-center">
         <li><a href={lang === 'en' ? '/services' : '/es/services'} class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.services')}</a></li>
-        <li><a href="#benefits" class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.benefits')}</a></li>
+        <li><a href={lang === 'en' ? '/#benefits' : '/es#benefits'} class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.benefits')}</a></li>
         <!-- <li><a href="#reviews" class="text-navy hover:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.reviews')}</a></li> -->
-        <li><a href="#benefits" class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.calculators')}</a></li>
-        <li><a href="#benefits" class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.contact')}</a></li>
+        <li><a href={lang === 'en' ? '/#benefits' : '/es#benefits'} class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.calculators')}</a></li>
+        <li><a href={lang === 'en' ? '/#contact' : '/es#contact'} class="nav-link text-navy lg:text-white font-medium text-2xl lg:text-base transition-colors menu-link">{t('nav.contact')}</a></li>
       </ul>
       
       <div class="mt-4 lg:mt-0 w-full max-w-[300px] lg:max-w-none lg:w-auto flex flex-col lg:flex-row items-center justify-center gap-4">
@@ -45,109 +45,101 @@ import { Menu, X } from "lucide-astro";
 </header>
 
 <script>
-  // Lógica del menú móvil ejecutada en el cliente
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  const lines = btn?.querySelectorAll('span');
-  let isMenuOpen = false;
+  document.addEventListener('astro:page-load', () => {
+    // Lógica del menú móvil ejecutada en el cliente
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const lines = btn?.querySelectorAll('span');
+    let isMenuOpen = false;
 
-  const toggleMenu = () => {
-    isMenuOpen = !isMenuOpen;
+    const toggleMenu = () => {
+      isMenuOpen = !isMenuOpen;
 
-    // Toggle de las clases principales del menú
-    menu?.classList.toggle('-translate-y-full');
-    menu?.classList.toggle('opacity-0');
-    menu?.classList.toggle('pointer-events-none');
-    document.body.classList.toggle('overflow-hidden');
+      menu?.classList.toggle('-translate-y-full');
+      menu?.classList.toggle('opacity-0');
+      menu?.classList.toggle('pointer-events-none');
+      document.body.classList.toggle('overflow-hidden');
 
-    // Animación del ícono hamburguesa a una "X"
-    if (lines && lines.length === 3) {
-      if (isMenuOpen) {
-        lines[0].classList.add('translate-y-2', 'rotate-45');
-        lines[1].classList.add('opacity-0');
-        lines[2].classList.add('-translate-y-2', '-rotate-45');
-      } else {
-        lines[0].classList.remove('translate-y-2', 'rotate-45');
-        lines[1].classList.remove('opacity-0');
-        lines[2].classList.remove('-translate-y-2', '-rotate-45');
+      if (lines && lines.length === 3) {
+        if (isMenuOpen) {
+          lines[0].classList.add('translate-y-2', 'rotate-45');
+          lines[1].classList.add('opacity-0');
+          lines[2].classList.add('-translate-y-2', '-rotate-45');
+        } else {
+          lines[0].classList.remove('translate-y-2', 'rotate-45');
+          lines[1].classList.remove('opacity-0');
+          lines[2].classList.remove('-translate-y-2', '-rotate-45');
+        }
       }
-    }
 
-    updateMenuColor();
-  };
+      updateMenuColor();
+    };
 
-  // Event listener para el botón
-  btn?.addEventListener('click', toggleMenu);
+    btn?.addEventListener('click', toggleMenu);
 
-  // Cerrar el menú al hacer clic en cualquier enlace (solo si está abierto en mobile)
-  document.querySelectorAll('.menu-link').forEach(link => {
-    link.addEventListener('click', () => {
-      if (isMenuOpen && window.innerWidth < 1024) {
+    document.querySelectorAll('.menu-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (isMenuOpen && window.innerWidth < 1024) {
+          toggleMenu();
+        }
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024 && isMenuOpen) {
         toggleMenu();
       }
     });
-  });
 
-  // Asegurarnos de restaurar el scroll si se redimensiona la pantalla a desktop
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 1024 && isMenuOpen) {
-      toggleMenu();
-    }
-  });
+    const navbar = document.getElementById("navbar");
+    const logo = document.getElementById("logo-navbar");
+    const menuIcon = document.getElementById("icon-menu");
+    const closeIcon = document.getElementById("icon-close");
 
-const navbar = document.getElementById("navbar");
-const logo = document.getElementById("logo-navbar");
+    const updateMenuColor = () => {
+      if (isMenuOpen) {
+        menuIcon?.classList.add("hidden");
+        closeIcon?.classList.remove("hidden", "text-white", "text-navy");
+        closeIcon?.classList.add("text-navy");
+        logo?.classList.remove("text-white/85");
+        logo?.classList.add("text-navy");
+      } else {
+        closeIcon?.classList.add("hidden");
+        menuIcon?.classList.remove("hidden", "text-navy");
+        logo?.classList.remove("text-navy");
+        logo?.classList.add("text-white/85");
 
+        if (window.scrollY > 100) {
+          menuIcon?.classList.remove("text-white");
+          menuIcon?.classList.add("text-navy");
+          logo?.classList.remove("text-white/85");
+          logo?.classList.add("text-navy");
+        } else {
+          menuIcon?.classList.remove("text-navy");
+          menuIcon?.classList.add("text-white");
+        }
+      }
+    };
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 100) {
-    navbar?.classList.add("bg-white/95", "shadow-lg", "scrolled");
-    navbar?.classList.remove("bg-transparent");
-    logo?.classList.add("text-navy");
-    logo?.classList.remove("text-white/85")
-  } else {
-    navbar?.classList.remove("bg-white/95", "shadow-lg", "scrolled");
-    navbar?.classList.add("bg-transparent");
-    logo?.classList.add("text-white/85");
-    logo?.classList.remove("text-navy")
-  }
-  updateMenuColor();
-});
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        navbar?.classList.add("bg-white/95", "shadow-lg", "scrolled");
+        navbar?.classList.remove("bg-transparent");
+        logo?.classList.add("text-navy");
+        logo?.classList.remove("text-white/85");
+      } else {
+        navbar?.classList.remove("bg-white/95", "shadow-lg", "scrolled");
+        navbar?.classList.add("bg-transparent");
+        logo?.classList.add("text-white/85");
+        logo?.classList.remove("text-navy");
+      }
+      updateMenuColor();
+    });
 
-const menuIcon = document.getElementById("icon-menu");
-const closeIcon = document.getElementById("icon-close");
-
-const updateMenuColor = () => {
-  if (isMenuOpen) {
-    // menú abierto = X azul
-    menuIcon?.classList.add("hidden");
-
-    closeIcon?.classList.remove("hidden", "text-white", "text-navy");
-    closeIcon?.classList.add("text-navy");
-    logo?.classList.remove("text-white/85");
-    logo?.classList.add("text-navy");
-
-  } else {
-    // menú cerrado
-    closeIcon?.classList.add("hidden");
-
-    menuIcon?.classList.remove("hidden", "text-navy");
-
-    logo?.classList.remove("text-navy");
-    logo?.classList.add("text-white/85");
-
+    // Initial check in case page is loaded already scrolled
     if (window.scrollY > 100) {
-      // scroll activo
-      menuIcon?.classList.remove("text-white");
-      menuIcon?.classList.add("text-navy");
-      logo?.classList.remove("text-white/85");
-      logo?.classList.add("text-navy");
-
-    } else {
-      // estado inicial
-      menuIcon?.classList.remove("text-navy");
-      menuIcon?.classList.add("text-white");
+      navbar?.classList.add("bg-white/95", "shadow-lg", "scrolled");
+      navbar?.classList.remove("bg-transparent");
     }
-  }
-};
+  });
 </script>
