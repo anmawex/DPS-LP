@@ -74,8 +74,8 @@ export const ui = {
     'footer.link.privacy': 'Privacy',
     'footer.link.terms': 'Terms',
 
-    'servicesPage.title': 'Our Financial Services',
-    'servicesPage.description': 'Comprehensive solutions for your vehicle and mortgage needs.',
+    'servicesPage.title': 'Our Financial\nServices',
+    'servicesPage.description': 'Comprehensive solutions tailored to support your vehicle financing and mortgage needs with flexibility, reliability, and personalized guidance every step of the way.',
   },
   es: {
     'nav.services': 'Servicios',
