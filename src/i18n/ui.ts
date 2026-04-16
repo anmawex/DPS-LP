@@ -80,6 +80,9 @@ export const ui = {
     'calcPage.title': 'Financial Calculators',
     'calcPage.description': 'Make smarter decisions with our professional tools designed to show you exactly how much you can save.',
 
+    'calc.tabs.autoRefi': 'Auto Refinance',
+    'calc.tabs.lease': 'New Loan',
+
     'calc.autoRefi.badge': 'Auto Loan',
     'calc.autoRefi.title': 'Auto Refinance Calculator',
     'calc.autoRefi.subtitle': 'Find out how much you could save by refinancing your auto loan at a lower rate or with a new term.',
@@ -174,6 +177,9 @@ export const ui = {
 
     'calcPage.title': 'Calculadoras Financieras',
     'calcPage.description': 'Toma decisiones más inteligentes con nuestras herramientas profesionales diseñadas para mostrarte exactamente cuánto puedes ahorrar.',
+
+    'calc.tabs.autoRefi': 'Refinanciamiento',
+    'calc.tabs.lease': 'Nuevo Préstamo',
 
     'calc.autoRefi.badge': 'Préstamo de Auto',
     'calc.autoRefi.title': 'Calculadora de Refinanciamiento de Auto',
