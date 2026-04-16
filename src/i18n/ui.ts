@@ -76,6 +76,30 @@ export const ui = {
 
     'servicesPage.title': 'Our Financial\nServices',
     'servicesPage.description': 'Comprehensive solutions tailored to support your vehicle financing and mortgage needs with flexibility, reliability, and personalized guidance every step of the way.',
+
+    'calcPage.title': 'Financial Calculators',
+    'calcPage.description': 'Make smarter decisions with our professional tools designed to show you exactly how much you can save.',
+
+    'calc.autoRefi.badge': 'Auto Loan',
+    'calc.autoRefi.title': 'Auto Refinance Calculator',
+    'calc.autoRefi.subtitle': 'Find out how much you could save by refinancing your auto loan at a lower rate or with a new term.',
+
+    'calc.autoRefi.input.currentPayment': 'Current Monthly Payment',
+    'calc.autoRefi.input.balance': 'Remaining Loan Balance',
+    'calc.autoRefi.input.currentRate': 'Current Annual Percentage Rate (APR)',
+    'calc.autoRefi.input.newRate': 'New Annual Percentage Rate (APR)',
+    'calc.autoRefi.input.currentTerm': 'Remaining Term (years)',
+    'calc.autoRefi.input.newTerm': 'New Term (years)',
+
+    'calc.autoRefi.output.newPayment': 'New Monthly Payment',
+    'calc.autoRefi.output.monthlySavings': 'Monthly Savings',
+    'calc.autoRefi.output.interestSavings': 'Interest Savings',
+    'calc.autoRefi.output.placeholder': '--',
+
+    'calc.autoRefi.btnCalculate': 'Calculate',
+    'calc.autoRefi.btnReset': 'Reset',
+    'calc.autoRefi.btnQuote': 'Get My Refinancing Quote',
+    'calc.autoRefi.disclaimer': '* This calculator provides estimates for informational purposes only. Actual results may vary based on your credit profile and lender terms.',
   },
   es: {
     'nav.services': 'Servicios',
@@ -147,5 +171,29 @@ export const ui = {
 
     'servicesPage.title': 'Nuestros Servicios Financieros',
     'servicesPage.description': 'Soluciones integrales para tus necesidades vehiculares e hipotecarias.',
+
+    'calcPage.title': 'Calculadoras Financieras',
+    'calcPage.description': 'Toma decisiones más inteligentes con nuestras herramientas profesionales diseñadas para mostrarte exactamente cuánto puedes ahorrar.',
+
+    'calc.autoRefi.badge': 'Préstamo de Auto',
+    'calc.autoRefi.title': 'Calculadora de Refinanciamiento de Auto',
+    'calc.autoRefi.subtitle': 'Descubre cuánto podrías ahorrar al refinanciar tu préstamo de auto con una tasa más baja o un nuevo plazo.',
+
+    'calc.autoRefi.input.currentPayment': 'Pago Mensual Actual',
+    'calc.autoRefi.input.balance': 'Saldo Restante del Préstamo',
+    'calc.autoRefi.input.currentRate': 'Tasa de Porcentaje Anual Actual (APR)',
+    'calc.autoRefi.input.currentTerm': 'Plazo Restante (años)',
+    'calc.autoRefi.input.newRate': 'Nueva Tasa de Porcentaje Anual (APR)',
+    'calc.autoRefi.input.newTerm': 'Nuevo Plazo (años)',
+
+    'calc.autoRefi.output.newPayment': 'Nuevo Pago Mensual',
+    'calc.autoRefi.output.monthlySavings': 'Ahorros Mensuales',
+    'calc.autoRefi.output.interestSavings': 'Ahorro de Intereses',
+    'calc.autoRefi.output.placeholder': '--',
+
+    'calc.autoRefi.btnCalculate': 'Calcular',
+    'calc.autoRefi.btnReset': 'Limpiar',
+    'calc.autoRefi.btnQuote': 'Obtener mi Cotización de Refinanciamiento',
+    'calc.autoRefi.disclaimer': '* Esta calculadora proporciona estimaciones solo con fines informativos. Los resultados reales pueden variar según tu perfil crediticio y los términos del prestamista.',
   },
 } as const;

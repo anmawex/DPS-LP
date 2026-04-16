@@ -1,0 +1,326 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { Calculator, RefreshCcw, TrendingDown, DollarSign, PiggyBank } from 'lucide-astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<MainLayout title={`${t('calcPage.title')} | DRIVE POINT SOLUTIONS`}>
+  <Navbar />
+
+  <main>
+        <!-- Hero Section -->
+        <section class="bg-navy pt-48 pb-16 lg:pt-48 lg:pb-24 relative overflow-hidden bg-[url('/calculator.jpg')] bg-cover bg-[center_0%] bg-no-repeat">
+        <!-- Capa oscura -->
+        <div class="absolute inset-0 bg-black/76"></div>
+
+      <!-- Decoración -->
+      <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue/10 to-transparent pointer-events-none"></div>
+      
+
+      <div class="container relative z-10">
+        <div class="max-w-2xl">
+          <!-- <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue/10 border border-blue/20 text-blue text-sm font-bold uppercase tracking-widest mb-6">
+            <Calculator size={14} />
+            {t('calcPage.title')}
+          </span> -->
+          <h1 class="text-4xl lg:text-6xl font-secondary font-black text-white mb-6 tracking-tighter leading-tight">
+            {t('calcPage.title')}
+          </h1>
+          <p class="text-white/60 text-lg lg:text-xl leading-relaxed font-light">
+            {t('calcPage.description')}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="py-16 lg:py-28 bg-[#F7F8FA]">
+      <div class="container">
+
+        <!-- Calculator Card -->
+        <div class="max-w-5xl mx-auto bg-white rounded-[40px] shadow-2xl shadow-black/5 border border-gray-100 overflow-hidden">
+
+          <!-- Calculator Header -->
+          <div class="bg-navy px-8 py-8 lg:px-12 lg:py-10 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-48 h-48 bg-blue/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-blue/20 border border-blue/30 flex items-center justify-center text-blue shrink-0">
+                <TrendingDown size={22} />
+              </div>
+              <div>
+                <span class="text-blue text-xs font-bold uppercase tracking-widest block mb-1">{t('calc.autoRefi.badge')}</span>
+                <h2 class="text-2xl lg:text-3xl font-secondary font-black text-white leading-tight">
+                  {t('calc.autoRefi.title')}
+                </h2>
+                <p class="text-white/50 text-sm mt-1 max-w-lg">{t('calc.autoRefi.subtitle')}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calculator Body -->
+          <div class="p-8 lg:p-12">
+            <form id="autoRefiForm" class="space-y-10" novalidate>
+
+              <!-- Inputs Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Pago Mensual Actual -->
+                <div class="input-group">
+                  <label for="currentPayment" class="input-label">
+                    {t('calc.autoRefi.input.currentPayment')}
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input
+                      type="number"
+                      id="currentPayment"
+                      name="currentPayment"
+                      min="0"
+                      step="0.01"
+                      placeholder="350.00"
+                      class="calc-input"
+                    />
+                  </div>
+                </div>
+
+                <!-- Saldo Restante -->
+                <div class="input-group">
+                  <label for="balance" class="input-label">
+                    {t('calc.autoRefi.input.balance')}
+                  </label>
+                  <div class="input-wrapper">
+                    <span class="input-prefix">$</span>
+                    <input
+                      type="number"
+                      id="balance"
+                      name="balance"
+                      min="0"
+                      step="0.01"
+                      placeholder="18,000.00"
+                      class="calc-input"
+                    />
+                  </div>
+                </div>
+
+                <!-- APR Actual -->
+                <div class="input-group">
+                  <label for="currentRate" class="input-label">
+                    {t('calc.autoRefi.input.currentRate')}
+                  </label>
+                  <div class="input-wrapper">
+                    <input
+                      type="number"
+                      id="currentRate"
+                      name="currentRate"
+                      min="0"
+                      max="100"
+                      step="0.01"
+                      placeholder="8.5"
+                      class="calc-input"
+                    />
+                    <span class="input-suffix">%</span>
+                  </div>
+                </div>
+
+                <!-- Nuevo APR -->
+                <div class="input-group">
+                  <label for="newRate" class="input-label">
+                    {t('calc.autoRefi.input.newRate')}
+                  </label>
+                  <div class="input-wrapper">
+                    <input
+                      type="number"
+                      id="newRate"
+                      name="newRate"
+                      min="0"
+                      max="100"
+                      step="0.01"
+                      placeholder="4.5"
+                      class="calc-input"
+                    />
+                    <span class="input-suffix">%</span>
+                  </div>
+                </div>
+
+                <!-- Plazo Restante -->
+                <div class="input-group">
+                  <label for="currentTerm" class="input-label">
+                    {t('calc.autoRefi.input.currentTerm')}
+                  </label>
+                  <div class="input-wrapper">
+                    <input
+                      type="number"
+                      id="currentTerm"
+                      name="currentTerm"
+                      min="0"
+                      max="10"
+                      step="1"
+                      placeholder="4"
+                      class="calc-input"
+                    />
+                    <span class="input-suffix">{lang === 'en' ? 'yrs' : 'años'}</span>
+                  </div>
+                </div>
+
+                <!-- Nuevo Plazo -->
+                <div class="input-group">
+                  <label for="newTerm" class="input-label">
+                    {t('calc.autoRefi.input.newTerm')}
+                  </label>
+                  <div class="input-wrapper">
+                    <input
+                      type="number"
+                      id="newTerm"
+                      name="newTerm"
+                      min="0"
+                      max="10"
+                      step="1"
+                      placeholder="5"
+                      class="calc-input"
+                    />
+                    <span class="input-suffix">{lang === 'en' ? 'yrs' : 'años'}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex flex-col sm:flex-row gap-4">
+                <button type="submit" id="calculateBtn" class="btn btn-primary flex-1 flex items-center justify-center gap-2 py-4 text-base">
+                  <Calculator size={18} />
+                  {t('calc.autoRefi.btnCalculate')}
+                </button>
+                <button type="reset" id="resetBtn" class="btn flex items-center justify-center gap-2 px-8 py-4 border border-gray-200 bg-white text-navy/70 hover:bg-gray-50 hover:border-gray-300 text-base rounded-2xl transition-all">
+                  <RefreshCcw size={16} />
+                  {t('calc.autoRefi.btnReset')}
+                </button>
+              </div>
+
+              <!-- Results -->
+              <div id="resultsSection" class="space-y-6 transition-all duration-500">
+                <div class="h-px bg-gray-100"></div>
+                <h3 class="text-sm font-bold text-navy/50 uppercase tracking-widest">{lang === 'en' ? 'Your Results' : 'Tus Resultados'}</h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <!-- Nuevo Pago Mensual -->
+                  <div class="result-card result-card--primary">
+                    <div class="result-icon">
+                      <DollarSign size={20} />
+                    </div>
+                    <span class="result-label">{t('calc.autoRefi.output.newPayment')}</span>
+                    <span class="result-value" id="outputNewPayment">{t('calc.autoRefi.output.placeholder')}</span>
+                  </div>
+
+                  <!-- Ahorros Mensuales -->
+                  <div class="result-card result-card--green">
+                    <div class="result-icon">
+                      <PiggyBank size={20} />
+                    </div>
+                    <span class="result-label">{t('calc.autoRefi.output.monthlySavings')}</span>
+                    <span class="result-value" id="outputMonthlySavings">{t('calc.autoRefi.output.placeholder')}</span>
+                  </div>
+
+                  <!-- Ahorro de Intereses -->
+                  <div class="result-card result-card--blue">
+                    <div class="result-icon">
+                      <TrendingDown size={20} />
+                    </div>
+                    <span class="result-label">{t('calc.autoRefi.output.interestSavings')}</span>
+                    <span class="result-value" id="outputInterestSavings">{t('calc.autoRefi.output.placeholder')}</span>
+                  </div>
+                </div>
+
+                <!-- CTA Quote Button -->
+                <div id="quoteSection" class="mt-2 p-6 rounded-3xl bg-gray-50 border border-gray-100">
+                  <p class="text-navy/60 text-sm mb-4 text-center">
+                    {lang === 'en'
+                      ? 'Like what you see? Let one of our experts put together a real offer for you.'
+                      : '¿Te gustan los números? Deja que uno de nuestros expertos te prepare una oferta real.'}
+                  </p>
+                  <a
+                    href="/es#contact"
+                    class="btn btn-primary w-full flex items-center justify-center gap-2 py-5 text-base font-bold"
+                    id="quoteBtn"
+                  >
+                    <PiggyBank size={20} />
+                    {t('calc.autoRefi.btnQuote')}
+                  </a>
+                </div>
+
+                <!-- Disclaimer -->
+                <p class="text-xs text-gray-400 leading-relaxed">{t('calc.autoRefi.disclaimer')}</p>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</MainLayout>
+
+<script>
+  import { calculateAutoRefinance } from '../../utils/calculatorLogic';
+
+  document.addEventListener('astro:page-load', () => {
+    const form = document.getElementById('autoRefiForm') as HTMLFormElement;
+    const outputs = {
+      newPayment: document.getElementById('outputNewPayment'),
+      monthlySavings: document.getElementById('outputMonthlySavings'),
+      interestSavings: document.getElementById('outputInterestSavings')
+    };
+
+    if (!form) return;
+
+    const formatCurrency = (val: number) => {
+      return new Intl.NumberFormat('es-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(val);
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const inputs = {
+        currentPayment: Number(formData.get('currentPayment')) || 0,
+        balance: Number(formData.get('balance')) || 0,
+        currentRate: Number(formData.get('currentRate')) || 0,
+        newRate: Number(formData.get('newRate')) || 0,
+        currentTerm: Number(formData.get('currentTerm')) || 0,
+        newTerm: Number(formData.get('newTerm')) || 0,
+      };
+
+      // Realizar el cálculo
+      const result = calculateAutoRefinance(inputs);
+
+      // Actualizar la interfaz
+      if (outputs.newPayment) outputs.newPayment.textContent = formatCurrency(result.newMonthlyPayment);
+      if (outputs.monthlySavings) outputs.monthlySavings.textContent = formatCurrency(result.monthlySavings);
+      if (outputs.interestSavings) outputs.interestSavings.textContent = formatCurrency(result.totalInterestSaved);
+
+      // Efecto visual de resaltado
+      const resultCards = document.querySelectorAll('.result-card');
+      resultCards.forEach(card => {
+        card.classList.add('scale-105', 'ring-2', 'ring-blue/20');
+        setTimeout(() => card.classList.remove('scale-105', 'ring-2', 'ring-blue/20'), 300);
+      });
+    });
+
+    // Resetear
+    form.addEventListener('reset', () => {
+      Object.values(outputs).forEach(out => {
+        if (out) out.textContent = '--';
+      });
+    });
+  });
+</script>
+
