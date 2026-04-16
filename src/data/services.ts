@@ -1,6 +1,8 @@
+import { CarFront, ClipboardCheck, Home, BarChart3 } from 'lucide-astro';
+
 export const getServicesData = (t: any) => [
   {
-    icon: '🚗',
+    icon: CarFront,
     featured: false,
     title: t('services.title.autoLoan'),
     desc: t('services.desc.autoLoan'),
@@ -13,7 +15,7 @@ export const getServicesData = (t: any) => [
     ]
   },
   {
-    icon: '📄',
+    icon: ClipboardCheck,
     featured: false,
     title: t('services.title.coverage'),
     desc: t('services.desc.coverage'),
@@ -25,7 +27,7 @@ export const getServicesData = (t: any) => [
     ]
   },
   {
-    icon: '🛡️',
+    icon: Home,
     featured: false,
     title: t('services.title.homeRefinance'),
     desc: t('services.desc.homeRefinance'),
@@ -38,7 +40,7 @@ export const getServicesData = (t: any) => [
     ]
   },
   {
-    icon: '📈',
+    icon: BarChart3,
     featured: false,
     title: t('services.title.credit'),
     desc: t('services.desc.credit'),

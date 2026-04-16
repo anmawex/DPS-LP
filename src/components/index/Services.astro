@@ -17,46 +17,49 @@ const servicesList = getServicesData(t);
 
     <!-- Mobile First Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-      {servicesList.map(service => (
-        <div 
-          class={`relative group overflow-hidden p-8 rounded-3xl min-h-[300px] flex flex-col justify-end transition-all duration-500 hover:-translate-y-2 border ${service.featured ? 'border-2 border-blue shadow-2xl shadow-blue/20' : 'border-gray-100 shadow-xl shadow-black/5'}`}
-        >
-          {/* Background Image Container */}
+      {servicesList.map(service => {
+        const Icon = service.icon;
+        return (
           <div 
-            class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-            style={`background-image: url('${service.bgImage}');`}
-          ></div>
-          
-          {/* Overlay - Darker for readability */}
-          <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent"></div>
+            class={`relative group overflow-hidden p-8 rounded-3xl min-h-[300px] flex flex-col justify-end transition-all duration-500 hover:-translate-y-2 border ${service.featured ? 'border-2 border-blue shadow-2xl shadow-blue/20' : 'border-gray-100 shadow-xl shadow-black/5'}`}
+          >
+            {/* Background Image Container */}
+            <div 
+              class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style={`background-image: url('${service.bgImage}');`}
+            ></div>
+            
+            {/* Overlay - Darker for readability */}
+            <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent"></div>
 
-          {/* Content */}
-          <div class="relative z-10">
-            {service.featured && (
-              <div class="absolute -top-16 right-0 bg-blue text-white px-4 py-1 rounded-full text-xs font-bold shadow-md tracking-wide">
-                {lang === 'en' ? 'Most Popular' : 'Más Popular'}
+            {/* Content */}
+            <div class="relative z-10">
+              {service.featured && (
+                <div class="absolute -top-16 right-0 bg-blue text-white px-4 py-1 rounded-full text-xs font-bold shadow-md tracking-wide">
+                  {lang === 'en' ? 'Most Popular' : 'Más Popular'}
+                </div>
+              )}
+
+              <div class="mb-4 text-white p-2 bg-white/10 backdrop-blur-md rounded-xl inline-block">
+                <Icon size={32} />
               </div>
-            )}
+              
+              <h3 class="text-xl sm:text-2xl text-white font-bold font-secondary mb-2 drop-shadow-md">
+                {service.title}
+              </h3>
+              
+              <p class="text-gray-200 text-sm sm:text-base mb-6 leading-relaxed max-w-sm">
+                {service.desc}
+              </p>
+              
+              <a href="#contact" class="inline-flex items-center gap-2 font-semibold text-blue-400 hover:text-white transition-colors group/link">
+                {t('services.link')}
+              </a>
+            </div>
 
-            {/* <div class="text-4xl mb-4 text-white">
-              {service.icon}
-            </div> */}
-            
-            <h3 class="text-xl sm:text-2xl text-white font-bold font-secondary mb-2 drop-shadow-md">
-              {service.title}
-            </h3>
-            
-            <p class="text-gray-200 text-sm sm:text-base mb-6 leading-relaxed max-w-sm">
-              {service.desc}
-            </p>
-            
-            <a href="#contact" class="inline-flex items-center gap-2 font-semibold text-blue-400 hover:text-white transition-colors group/link">
-              {t('services.link')}
-            </a>
           </div>
-
-        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>

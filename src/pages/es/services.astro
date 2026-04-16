@@ -40,59 +40,64 @@ const services = getServicesData(t);
     <section class="py-20 lg:py-40 bg-white">
       <div class="container">
         <div class="space-y-32 lg:space-y-56">
-          {services.map((service, index) => (
-            <div class={`flex flex-col lg:flex-row gap-16 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-              <!-- Visual Area -->
-              <div class="w-full lg:w-3/5 group">
-                <div class="relative aspect-[16/10] overflow-hidden rounded-[40px] bg-gray-50 border border-gray-100 shadow-2xl shadow-black/5 transition-transform duration-500 group-hover:scale-[1.02]">
-                  {/* Background Image */}
-                  <div 
-                    class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                    style={`background-image: url('${service.bgImage}');`}
-                  ></div>
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <div class={`flex flex-col lg:flex-row gap-16 lg:gap-24 items-center ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
+                <!-- Visual Area -->
+                <div class="w-full lg:w-3/5 group">
+                  <div class="relative aspect-[16/10] overflow-hidden rounded-[40px] bg-gray-50 border border-gray-100 shadow-2xl shadow-black/5 transition-transform duration-500 group-hover:scale-[1.02]">
+                    <!-- Background Image -->
+                    <div 
+                      class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                      style={`background-image: url('${service.bgImage}');`}
+                    ></div>
 
-                  {/* Icon Placeholder (visible only if no image or as a fallback overlay part) */}
-                  <div class="absolute inset-0 flex flex-col items-center justify-center bg-navy/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span class="text-6xl mb-4 drop-shadow-2xl">{service.icon}</span>
+                    <!-- Icon Placeholder -->
+                    <div class="absolute inset-0 flex flex-col items-center justify-center bg-navy/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div class="text-white drop-shadow-2xl">
+                        <Icon size={64} strokeWidth={1.5} />
+                      </div>
+                    </div>
+                    
+                    <!-- Decorative overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue/10 to-transparent pointer-events-none"></div>
+                  </div>
+                </div>
+
+                <!-- Information Area -->
+                <div class="w-full lg:w-2/5 space-y-8">
+                  <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue/5 text-blue text-sm font-bold uppercase tracking-wider">
+                    <Icon size={18} />
+                    <span>{service.title}</span>
                   </div>
                   
-                  {/* Decorative overlay */}
-                  <div class="absolute inset-0 bg-gradient-to-br from-blue/10 to-transparent pointer-events-none"></div>
+                  <h2 class="text-3xl lg:text-5xl font-secondary font-black text-navy leading-tight">
+                    {service.title}
+                  </h2>
+                  
+                  <p class="text-gray-500 text-lg lg:text-xl leading-relaxed">
+                    {service.desc}
+                  </p>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                    {service.features.map(feature => (
+                      <div class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100 transition-colors hover:bg-white hover:border-blue/20 hover:shadow-lg hover:shadow-blue/5">
+                        <div class="w-2 h-2 rounded-full bg-blue shrink-0"></div>
+                        <span class="text-sm font-semibold text-navy/80">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div class="pt-8">
+                    <a href="/es/#contact" class="btn btn-primary shadow-xl shadow-blue/20 px-10 py-4 text-lg">
+                      {lang === 'en' ? 'Get Started' : 'Empezar ahora'}
+                    </a>
+                  </div>
                 </div>
               </div>
-
-              <!-- Information Area -->
-              <div class="w-full lg:w-2/5 space-y-8">
-                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-blue/5 text-blue text-sm font-bold uppercase tracking-wider">
-                  {service.icon}
-                  <span>{service.title}</span>
-                </div>
-                
-                <h2 class="text-3xl lg:text-5xl font-secondary font-black text-navy leading-tight">
-                  {service.title}
-                </h2>
-                
-                <p class="text-gray-500 text-lg lg:text-xl leading-relaxed">
-                  {service.desc}
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                  {service.features.map(feature => (
-                    <div class="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100 transition-colors hover:bg-white hover:border-blue/20 hover:shadow-lg hover:shadow-blue/5">
-                      <div class="w-2 h-2 rounded-full bg-blue shrink-0"></div>
-                      <span class="text-sm font-semibold text-navy/80">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div class="pt-8">
-                  <a href="/es/#contact" class="btn btn-primary shadow-xl shadow-blue/20 px-10 py-4 text-lg">
-                    {lang === 'en' ? 'Get Started' : 'Empezar ahora'}
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
