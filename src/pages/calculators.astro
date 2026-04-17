@@ -73,12 +73,12 @@ const t = useTranslations(lang);
               {t('calc.tabs.autoRefi')}
             </button>
             <button 
-              id="tab-newLoan" 
-              class="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl font-bold text-sm transition-all duration-300 text-gray-400 hover:bg-gray-100 hover:text-navy cursor-pointer"
-              data-tab="newLoan"
+              id="tab-homeLoan" 
+              class="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl font-bold text-sm transition-all duration-300 text-gray-400 hover:bg-navy-light cursor-pointer"
+              data-tab="homeLoan"
             >
-              <Calculator size={18} />
-              {t('calc.tabs.lease')}
+              <PiggyBank size={18} />
+              {t('calc.tabs.homeLoan')}
             </button>
           </div>
 
@@ -276,15 +276,147 @@ const t = useTranslations(lang);
               </form>
             </div>
 
-            <!-- Tab 2: Lease/New Loan Placeholder -->
-            <div id="content-newLoan" class="tab-content hidden transition-all duration-500">
-              <div class="py-20 text-center">
-                <div class="w-20 h-20 bg-blue/10 rounded-full flex items-center justify-center text-blue mx-auto mb-6">
-                  <Calculator size={40} />
+            <!-- Tab 2: Home Loan -->
+            <div id="content-homeLoan" class="tab-content hidden transition-all duration-500">
+              <form id="homeLoanForm" class="space-y-10" novalidate>
+                <!-- Inputs Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <!-- Home Price -->
+                  <div class="input-group">
+                    <label for="homePrice" class="input-label">{t('calc.homeLoan.input.price')}</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input type="number" id="homePrice" name="homePrice" min="0" step="1000" placeholder="350000" class="calc-input" />
+                    </div>
+                  </div>
+
+                  <!-- Down Payment -->
+                  <div class="input-group">
+                    <label for="downPayment" class="input-label">{t('calc.homeLoan.input.downPayment')}</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input type="number" id="downPayment" name="downPayment" min="0" step="1000" placeholder="70000" class="calc-input" />
+                    </div>
+                  </div>
+
+                  <!-- Interest Rate -->
+                  <div class="input-group">
+                    <label for="interestRate" class="input-label">{t('calc.homeLoan.input.interestRate')}</label>
+                    <div class="input-wrapper">
+                      <input type="number" id="interestRate" name="interestRate" min="0" max="100" step="0.01" placeholder="6.5" class="calc-input" />
+                      <span class="input-suffix">%</span>
+                    </div>
+                  </div>
+
+                  <!-- Loan Term -->
+                  <div class="input-group">
+                    <label for="loanTermYears" class="input-label">{t('calc.homeLoan.input.years')}</label>
+                    <div class="input-wrapper">
+                      <input type="number" id="loanTermYears" name="loanTermYears" min="1" max="50" step="1" placeholder="30" class="calc-input" />
+                    </div>
+                  </div>
+
+                  <!-- Property Tax -->
+                  <div class="input-group">
+                    <label for="propertyTaxYr" class="input-label">{t('calc.homeLoan.input.propertyTax')}</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input type="number" id="propertyTaxYr" name="propertyTaxYr" min="0" step="0.01" placeholder="4200" class="calc-input" />
+                    </div>
+                  </div>
+
+                  <!-- Home Insurance -->
+                  <div class="input-group">
+                    <label for="homeInsuranceYr" class="input-label">{t('calc.homeLoan.input.homeInsurance')}</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input type="number" id="homeInsuranceYr" name="homeInsuranceYr" min="0" step="0.01" placeholder="1200" class="calc-input" />
+                    </div>
+                  </div>
+
+                  <!-- PMI -->
+                  <div class="input-group">
+                    <label for="pmi" class="input-label">{t('calc.homeLoan.input.pmi')}</label>
+                    <div class="input-wrapper">
+                      <span class="input-prefix">$</span>
+                      <input type="number" id="pmi" name="pmi" min="0" step="0.01" placeholder="150" class="calc-input" />
+                    </div>
+                  </div>
                 </div>
-                <h3 class="text-2xl font-black text-navy mb-4">New Loan Calculator</h3>
-                <p class="text-gray-500 max-w-sm mx-auto">This calculator is under development. Soon you will be able to calculate your new vehicle loan here.</p>
-              </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <button type="submit" id="homeCalculateBtn" class="btn btn-primary flex-1 flex items-center justify-center gap-2 py-4 text-base">
+                    <Calculator size={18} />
+                    {t('calc.autoRefi.btnCalculate')}
+                  </button>
+                  <button type="reset" class="btn flex items-center justify-center gap-2 px-8 py-4 border border-gray-200 bg-white text-navy/70 hover:bg-gray-50 hover:border-gray-300 text-base rounded-2xl transition-all">
+                    <RefreshCcw size={16} />
+                    {t('calc.autoRefi.btnReset')}
+                  </button>
+                </div>
+
+                <!-- Results -->
+                <div id="homeResultsSection" class="space-y-6 pt-10 border-t border-gray-100">
+                  <h3 class="text-sm font-bold text-navy/50 uppercase tracking-widest">{lang === 'en' ? 'Your Mortgage Results' : 'Tus Resultados Hipotecarios'}</h3>
+
+                  <!-- Main Monthly Result -->
+                  <div class="result-card result-card--primary p-8 text-center sm:text-left">
+                    <div class="sm:flex items-center justify-between gap-6">
+                      <div class="space-y-1 mb-4 sm:mb-0">
+                        <span class="result-label block text-white/60">{t('calc.homeLoan.output.monthlyPayment')}</span>
+                        <span class="text-4xl lg:text-5xl font-black text-white" id="outputHomeMonthlyPayment">--</span>
+                      </div>
+                      <div class="shrink-0">
+                        <div class="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white mx-auto sm:mx-0">
+                          <DollarSign size={32} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Details Grid -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col gap-1">
+                      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t('calc.homeLoan.output.principalInterest')}</span>
+                      <span class="text-lg font-black text-navy" id="outputHomePI">--</span>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col gap-1">
+                      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t('calc.homeLoan.output.propertyTax')} (Mo.)</span>
+                      <span class="text-lg font-black text-navy" id="outputHomeTax">--</span>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col gap-1">
+                      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t('calc.homeLoan.output.homeInsurance')} (Mo.)</span>
+                      <span class="text-lg font-black text-navy" id="outputHomeInsurance">--</span>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col gap-1">
+                      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t('calc.homeLoan.output.loanAmount')}</span>
+                      <span class="text-lg font-black text-navy" id="outputHomeLoanAmount">--</span>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col gap-1">
+                      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t('calc.homeLoan.output.totalInterest')}</span>
+                      <span class="text-lg font-black text-navy text-blue" id="outputHomeTotalInterest">--</span>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col gap-1">
+                      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{t('calc.homeLoan.output.totalCost')}</span>
+                      <span class="text-lg font-black text-navy" id="outputHomeTotalCost">--</span>
+                    </div>
+                  </div>
+
+                  <!-- Quote CTA Button -->
+                  <div class="mt-4 p-8 rounded-3xl bg-blue/5 border border-blue/10 text-center">
+                    <p class="text-navy/70 text-sm mb-6 max-w-sm mx-auto">
+                      Get a real mortgage quote from our licensed experts and secure your dream home at the best possible rate.
+                    </p>
+                    <button id="homeQuoteBtn" class="btn btn-primary px-10 py-5 text-base font-bold inline-flex items-center gap-2">
+                      <PiggyBank size={20} />
+                      {t('calc.homeLoan.btnQuote')}
+                    </button>
+                  </div>
+
+                  <p class="text-xs text-gray-400 leading-relaxed text-center">{t('calc.autoRefi.disclaimer')}</p>
+                </div>
+              </form>
             </div>
 
           </div>
@@ -370,11 +502,84 @@ const t = useTranslations(lang);
     </div>
   </div>
 
+  <!-- Home Loan Quote Modal -->
+  <div
+    id="homeQuoteModal"
+    class="fixed inset-0 z-[999] flex items-center justify-center p-4 hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="homeQuoteModalTitle"
+  >
+    <!-- Dark backdrop -->
+    <div id="homeQuoteModalBackdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+    <!-- Panel -->
+    <div class="relative z-10 bg-white rounded-[28px] shadow-2xl w-full max-w-md overflow-hidden">
+      <!-- Header -->
+      <div class="bg-navy px-8 py-6 flex items-center justify-between">
+        <div>
+          <h3 id="homeQuoteModalTitle" class="text-lg font-black text-white leading-tight">Get a Real Mortgage Quote</h3>
+          <p class="text-white/40 text-xs mt-0.5">We'll prepare a custom offer tailored to you.</p>
+        </div>
+        <button id="homeQuoteModalClose" class="text-white/40 hover:text-white transition-colors" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-8 space-y-4">
+        <!-- Summary Chips -->
+        <div class="flex flex-wrap gap-2 mb-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue/10 text-blue text-xs font-bold">
+            Monthly Pmt: <span id="modalHomeMonthly" class="font-black">—</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-navy text-xs font-bold">
+            Loan Amt: <span id="modalHomeLoan" class="font-black">—</span>
+          </span>
+        </div>
+
+        <form id="homeQuoteForm" class="space-y-4" novalidate>
+          <div>
+            <label for="homeQuoteName" class="block text-xs font-bold text-navy/60 uppercase tracking-wider mb-1.5">Full Name <span class="text-red-500">*</span></label>
+            <input id="homeQuoteName" name="homeQuoteName" type="text" required autocomplete="name"
+              placeholder="John Doe"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue/20 outline-none transition text-navy text-sm font-medium bg-gray-50 focus:bg-white"
+            />
+          </div>
+          <div>
+            <label for="homeQuoteEmail" class="block text-xs font-bold text-navy/60 uppercase tracking-wider mb-1.5">Email Address <span class="text-red-500">*</span></label>
+            <input id="homeQuoteEmail" name="homeQuoteEmail" type="email" required autocomplete="email"
+              placeholder="john@example.com"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue/20 outline-none transition text-navy text-sm font-medium bg-gray-50 focus:bg-white"
+            />
+          </div>
+          <div>
+            <label for="homeQuotePhone" class="block text-xs font-bold text-navy/60 uppercase tracking-wider mb-1.5">Phone Number (optional)</label>
+            <input id="homeQuotePhone" name="homeQuotePhone" type="tel" autocomplete="tel"
+              placeholder="+1 (555) 000-0000"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue/20 outline-none transition text-navy text-sm font-medium bg-gray-50 focus:bg-white"
+            />
+          </div>
+
+          <!-- Feedback -->
+          <div id="homeQuoteFeedback" class="hidden px-4 py-3 rounded-xl text-sm font-semibold text-center" role="alert"></div>
+
+          <button type="submit" id="homeQuoteSubmitBtn"
+            class="btn btn-primary w-full flex items-center justify-center gap-2 py-4 text-sm font-bold mt-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span id="homeQuoteSubmitText">Send My Quote Request</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <Footer />
 </MainLayout>
 
 <script>
-  import { calculateAutoRefinance } from '../utils/calculatorLogic';
+  import { calculateAutoRefinance, calculateMortgage } from '../utils/calculatorLogic';
 
   document.addEventListener('astro:page-load', () => {
     // --- Tabs Logic ---
@@ -546,6 +751,151 @@ const t = useTranslations(lang);
       } finally {
         quoteSubmitBtn.disabled = false;
         if (quoteSubmitTxt) quoteSubmitTxt.textContent = 'Send My Quote Request';
+      }
+    });
+
+    // --- Home Loan Logic ---
+    let lastHomeInputs = { homePrice: 0, downPayment: 0, loanTermYears: 30, annualRate: 0, annualPropertyTax: 0, annualHomeInsurance: 0, monthlyPMI: 0 };
+    let lastHomeResults = { loanAmount: 0, principalAndInterest: 0, monthlyPropertyTax: 0, monthlyHomeInsurance: 0, totalMonthlyPayment: 0, totalInterest: 0, totalCost: 0 };
+    
+    const homeForm = document.getElementById('homeLoanForm') as HTMLFormElement;
+    if (homeForm) {
+      const homeOutputs = {
+        monthlyPayment: document.getElementById('outputHomeMonthlyPayment'),
+        pi: document.getElementById('outputHomePI'),
+        tax: document.getElementById('outputHomeTax'),
+        insurance: document.getElementById('outputHomeInsurance'),
+        loanAmount: document.getElementById('outputHomeLoanAmount'),
+        totalInterest: document.getElementById('outputHomeTotalInterest'),
+        totalCost: document.getElementById('outputHomeTotalCost')
+      };
+
+      homeForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(homeForm);
+        
+        lastHomeInputs = {
+          homePrice: Number(fd.get('homePrice')) || 0,
+          downPayment: Number(fd.get('downPayment')) || 0,
+          loanTermYears: Number(fd.get('loanTermYears')) || 30,
+          annualRate: Number(fd.get('interestRate')) || 0,
+          annualPropertyTax: Number(fd.get('propertyTaxYr')) || 0,
+          annualHomeInsurance: Number(fd.get('homeInsuranceYr')) || 0,
+          monthlyPMI: Number(fd.get('pmi')) || 0,
+        };
+
+        lastHomeResults = calculateMortgage(lastHomeInputs);
+        const res = lastHomeResults;
+
+        if (homeOutputs.monthlyPayment) homeOutputs.monthlyPayment.textContent = formatCurrency(res.totalMonthlyPayment);
+        if (homeOutputs.pi) homeOutputs.pi.textContent = formatCurrency(res.principalAndInterest);
+        if (homeOutputs.tax) homeOutputs.tax.textContent = formatCurrency(res.monthlyPropertyTax);
+        if (homeOutputs.insurance) homeOutputs.insurance.textContent = formatCurrency(res.monthlyHomeInsurance);
+        if (homeOutputs.loanAmount) homeOutputs.loanAmount.textContent = formatCurrency(res.loanAmount);
+        if (homeOutputs.totalInterest) homeOutputs.totalInterest.textContent = formatCurrency(res.totalInterest);
+        if (homeOutputs.totalCost) homeOutputs.totalCost.textContent = formatCurrency(res.totalCost);
+
+        const section = document.getElementById('homeResultsSection');
+        section?.classList.add('scale-[1.01]', 'brightness-105');
+        setTimeout(() => section?.classList.remove('scale-[1.01]', 'brightness-105'), 200);
+      });
+
+      homeForm.addEventListener('reset', () => {
+        Object.values(homeOutputs).forEach(out => { if (out) out.textContent = '--'; });
+        lastHomeInputs = { homePrice: 0, downPayment: 0, loanTermYears: 30, annualRate: 0, annualPropertyTax: 0, annualHomeInsurance: 0, monthlyPMI: 0 };
+        lastHomeResults = { loanAmount: 0, principalAndInterest: 0, monthlyPropertyTax: 0, monthlyHomeInsurance: 0, totalMonthlyPayment: 0, totalInterest: 0, totalCost: 0 };
+      });
+    }
+
+    // --- Home Quote Modal Logic ---
+    const hQuoteBtn       = document.getElementById('homeQuoteBtn');
+    const hQuoteModal     = document.getElementById('homeQuoteModal');
+    const hQuoteBackdrop  = document.getElementById('homeQuoteModalBackdrop');
+    const hQuoteClose     = document.getElementById('homeQuoteModalClose');
+    const hQuoteForm      = document.getElementById('homeQuoteForm')      as HTMLFormElement;
+    const hQuoteSubmitBtn = document.getElementById('homeQuoteSubmitBtn') as HTMLButtonElement;
+    const hQuoteSubmitTxt = document.getElementById('homeQuoteSubmitText');
+    const hQuoteFeedback  = document.getElementById('homeQuoteFeedback');
+
+    const modalHomeMonthly = document.getElementById('modalHomeMonthly');
+    const modalHomeLoan    = document.getElementById('modalHomeLoan');
+
+    function openHomeModal() {
+      if (lastHomeResults.totalMonthlyPayment === 0) {
+        alert('Please calculate your mortgage results first.');
+        return;
+      }
+      if (modalHomeMonthly) modalHomeMonthly.textContent = formatCurrency(lastHomeResults.totalMonthlyPayment);
+      if (modalHomeLoan)    modalHomeLoan.textContent    = formatCurrency(lastHomeResults.loanAmount);
+
+      hQuoteModal?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeHomeModal() {
+      hQuoteModal?.classList.add('hidden');
+      document.body.style.overflow = '';
+      hQuoteFeedback?.classList.add('hidden');
+      hQuoteForm?.reset();
+    }
+
+    hQuoteBtn?.addEventListener('click', (e) => { e.preventDefault(); openHomeModal(); });
+    hQuoteClose?.addEventListener('click', closeHomeModal);
+    hQuoteBackdrop?.addEventListener('click', closeHomeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeHomeModal(); });
+
+    function showHQuoteFeedback(success: boolean, msg: string) {
+      if (!hQuoteFeedback) return;
+      hQuoteFeedback.textContent = msg;
+      hQuoteFeedback.className = 'px-4 py-3 rounded-xl text-sm font-semibold text-center';
+      hQuoteFeedback.classList.add(
+        success ? 'bg-green-50' : 'bg-red-50',
+        success ? 'text-green-700' : 'text-red-700'
+      );
+    }
+
+    hQuoteForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name  = (document.getElementById('homeQuoteName')  as HTMLInputElement).value.trim();
+      const email = (document.getElementById('homeQuoteEmail') as HTMLInputElement).value.trim();
+      const phone = (document.getElementById('homeQuotePhone') as HTMLInputElement).value.trim();
+
+      if (!name || !email) {
+        showHQuoteFeedback(false, 'Please enter your name and email.');
+        return;
+      }
+
+      hQuoteSubmitBtn.disabled = true;
+      if (hQuoteSubmitTxt) hQuoteSubmitTxt.textContent = 'Sending…';
+
+      try {
+        const res  = await fetch('/send_home_quote.php', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fullName: name,
+            email,
+            phone,
+            ...lastHomeInputs,
+            ...lastHomeResults,
+          }),
+        });
+
+        const json = await res.json();
+
+        if (res.ok && json.success) {
+          showHQuoteFeedback(true, '✅ Request sent! Our team will reach out shortly.');
+          hQuoteForm.reset();
+          setTimeout(closeHomeModal, 3000);
+        } else {
+          showHQuoteFeedback(false, json.message || 'Something went wrong. Please try again.');
+        }
+      } catch {
+        showHQuoteFeedback(false, 'Network error. Please try again.');
+      } finally {
+        hQuoteSubmitBtn.disabled = false;
+        if (hQuoteSubmitTxt) hQuoteSubmitTxt.textContent = 'Send My Quote Request';
       }
     });
   });

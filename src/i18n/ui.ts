@@ -81,7 +81,29 @@ export const ui = {
     'calcPage.description': 'Make smarter decisions with our professional tools designed to show you exactly how much you can save.',
 
     'calc.tabs.autoRefi': 'Auto Refinance',
-    'calc.tabs.lease': 'New Loan',
+    'calc.tabs.homeLoan': 'Home Loan',
+
+    'calc.homeLoan.badge': 'Mortgage',
+    'calc.homeLoan.title': 'Home Loan Calculator',
+    'calc.homeLoan.subtitle': 'Estimate your monthly mortgage payments including taxes, insurance, and interest costs.',
+
+    'calc.homeLoan.input.price': 'Home Price',
+    'calc.homeLoan.input.downPayment': 'Down Payment',
+    'calc.homeLoan.input.interestRate': 'Interest Rate (%)',
+    'calc.homeLoan.input.years': 'Loan Term (years)',
+    'calc.homeLoan.input.propertyTax': 'Property Tax (Yearly)',
+    'calc.homeLoan.input.homeInsurance': 'Home Insurance (Yearly)',
+    'calc.homeLoan.input.pmi': 'PMI (Monthly)',
+
+    'calc.homeLoan.output.monthlyPayment': 'Estimated Monthly Payment',
+    'calc.homeLoan.output.principalInterest': 'Principal & Interest',
+    'calc.homeLoan.output.propertyTax': 'Property Tax',
+    'calc.homeLoan.output.homeInsurance': 'Home Insurance',
+    'calc.homeLoan.output.loanAmount': 'Loan Amount',
+    'calc.homeLoan.output.totalInterest': 'Total Interest',
+    'calc.homeLoan.output.totalCost': 'Total Cost',
+
+    'calc.homeLoan.btnQuote': 'Get My Mortgage Quote',
 
     'calc.autoRefi.badge': 'Auto Loan',
     'calc.autoRefi.title': 'Auto Refinance Calculator',
@@ -205,7 +227,29 @@ export const ui = {
     'calcPage.description': 'Toma decisiones más inteligentes con nuestras herramientas profesionales diseñadas para mostrarte exactamente cuánto puedes ahorrar.',
 
     'calc.tabs.autoRefi': 'Refinanciamiento',
-    'calc.tabs.lease': 'Nuevo Préstamo',
+    'calc.tabs.homeLoan': 'Préstamo Casa',
+
+    'calc.homeLoan.badge': 'Hipotecario',
+    'calc.homeLoan.title': 'Calculadora de Préstamo de Casa',
+    'calc.homeLoan.subtitle': 'Estima tus pagos hipotecarios mensuales incluyendo impuestos, seguros y costos de intereses.',
+
+    'calc.homeLoan.input.price': 'Precio de la Casa',
+    'calc.homeLoan.input.downPayment': 'Pago Inicial',
+    'calc.homeLoan.input.interestRate': 'Tasa de Interés (%)',
+    'calc.homeLoan.input.years': 'Plazo del Préstamo (años)',
+    'calc.homeLoan.input.propertyTax': 'Impuesto Predial (Anual)',
+    'calc.homeLoan.input.homeInsurance': 'Seguro de Casa (Anual)',
+    'calc.homeLoan.input.pmi': 'PMI (Mensual)',
+
+    'calc.homeLoan.output.monthlyPayment': 'Pago Mensual Estimado',
+    'calc.homeLoan.output.principalInterest': 'Principal e Interés',
+    'calc.homeLoan.output.propertyTax': 'Impuesto Predial',
+    'calc.homeLoan.output.homeInsurance': 'Seguro de Casa',
+    'calc.homeLoan.output.loanAmount': 'Monto del Préstamo',
+    'calc.homeLoan.output.totalInterest': 'Interés Total',
+    'calc.homeLoan.output.totalCost': 'Costo Total',
+
+    'calc.homeLoan.btnQuote': 'Obtener mi Cotización Hipotecaria',
 
     'calc.autoRefi.badge': 'Préstamo de Auto',
     'calc.autoRefi.title': 'Calculadora de Refinanciamiento de Auto',

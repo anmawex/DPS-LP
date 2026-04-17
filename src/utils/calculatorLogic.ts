@@ -70,3 +70,70 @@ export function calculateAutoRefinance(inputs: AutoRefiInputs): AutoRefiOutputs 
     totalInterestSaved,
   };
 }
+
+export interface MortgageInputs {
+  homePrice: number;        // Precio de la casa ($)
+  downPayment: number;      // Pago inicial ($)
+  loanTermYears: number;    // Plazo del préstamo (años)
+  annualRate: number;       // Tasa de interés anual (%)
+  annualPropertyTax: number; // Impuesto predial anual ($)
+  annualHomeInsurance: number; // Seguro de casa anual ($)
+  monthlyPMI: number;       // PMI mensual ($, puede ser 0)
+}
+
+export interface MortgageOutputs {
+  loanAmount: number;            // Monto del préstamo ($)
+  principalAndInterest: number;  // Principal e interés mensual ($)
+  monthlyPropertyTax: number;    // Impuesto predial mensual ($)
+  monthlyHomeInsurance: number;  // Seguro de casa mensual ($)
+  totalMonthlyPayment: number;   // Pago mensual total ($)
+  totalInterest: number;         // Interés total pagado en toda la vida del préstamo ($)
+  totalCost: number;             // Costo total (préstamo + intereses) ($)
+}
+
+export function calculateMortgage(inputs: MortgageInputs): MortgageOutputs {
+  const {
+    homePrice,
+    downPayment,
+    loanTermYears,
+    annualRate,
+    annualPropertyTax,
+    annualHomeInsurance,
+    monthlyPMI,
+  } = inputs;
+
+  const months = loanTermYears * 12;
+
+  // 1. Monto del préstamo: lo que el banco financia
+  const loanAmount = homePrice - downPayment;
+
+  // 2. Principal e interés: fórmula PMT sobre el monto financiado
+  const principalAndInterest = calculatePMT(loanAmount, annualRate, months);
+
+  // 3. Impuesto predial y seguro: divididos entre 12 para cuota mensual
+  const monthlyPropertyTax = parseFloat((annualPropertyTax / 12).toFixed(2));
+  const monthlyHomeInsurance = parseFloat((annualHomeInsurance / 12).toFixed(2));
+
+  // 4. Pago mensual total: suma de todos los componentes
+  const totalMonthlyPayment = parseFloat(
+    (principalAndInterest + monthlyPropertyTax + monthlyHomeInsurance + monthlyPMI).toFixed(2)
+  );
+
+  // 5. Interés total = (cuota P&I × meses) - monto del préstamo
+  const totalInterest = parseFloat(
+    ((principalAndInterest * months) - loanAmount).toFixed(2)
+  );
+
+  // 6. Costo total = monto del préstamo + todos los intereses
+  const totalCost = parseFloat((loanAmount + totalInterest).toFixed(2));
+
+  return {
+    loanAmount,
+    principalAndInterest,
+    monthlyPropertyTax,
+    monthlyHomeInsurance,
+    totalMonthlyPayment,
+    totalInterest,
+    totalCost,
+  };
+}
