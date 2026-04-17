@@ -258,18 +258,16 @@ const t = useTranslations(lang);
                   <!-- CTA Quote Button -->
                   <div id="quoteSection" class="mt-2 p-6 rounded-3xl bg-navy/3 border border-gray-100">
                     <p class="text-navy/60 text-sm mb-4 text-center">
-                      {lang === 'en'
-                        ? 'Like what you see? Let one of our experts put together a real offer for you.'
-                        : '¿Te gustan los números? Deja que uno de nuestros expertos te prepare una oferta real.'}
+                      Like what you see? Let one of our experts put together a real offer for you.
                     </p>
-                    <a
-                      href={lang === 'en' ? '/#contact' : '/es#contact'}
-                      class="btn btn-primary w-full flex items-center justify-center gap-2 py-5 text-base font-bold"
+                    <button
+                      type="button"
                       id="quoteBtn"
+                      class="btn btn-primary w-full flex items-center justify-center gap-2 py-5 text-base font-bold"
                     >
                       <PiggyBank size={20} />
                       {t('calc.autoRefi.btnQuote')}
-                    </a>
+                    </button>
                   </div>
 
                   <!-- Disclaimer -->
@@ -296,6 +294,82 @@ const t = useTranslations(lang);
     </section>
   </main>
 
+  <!-- Quote Modal -->
+  <div
+    id="quoteModal"
+    class="fixed inset-0 z-[999] flex items-center justify-center p-4 hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="quoteModalTitle"
+  >
+    <!-- Backdrop -->
+    <div id="quoteModalBackdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+    <!-- Panel -->
+    <div class="relative z-10 bg-white rounded-[28px] shadow-2xl w-full max-w-md overflow-hidden">
+      <!-- Header -->
+      <div class="bg-navy px-8 py-6 flex items-center justify-between">
+        <div>
+          <h3 id="quoteModalTitle" class="text-lg font-black text-white leading-tight">Get a Real Quote</h3>
+          <p class="text-white/40 text-xs mt-0.5">We'll send you a tailored offer based on your numbers.</p>
+        </div>
+        <button id="quoteModalClose" class="text-white/40 hover:text-white transition-colors" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-8 space-y-4">
+        <!-- Summary chips -->
+        <div class="flex flex-wrap gap-2 mb-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue/10 text-blue text-xs font-bold">
+            New payment: <span id="modalNewPayment" class="font-black">—</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-bold">
+            Monthly savings: <span id="modalMonthlySavings" class="font-black">—</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue/10 text-blue text-xs font-bold">
+            Interest saved: <span id="modalInterestSavings" class="font-black">—</span>
+          </span>
+        </div>
+
+        <form id="quoteForm" class="space-y-4" novalidate>
+          <div>
+            <label for="quoteName" class="block text-xs font-bold text-navy/60 uppercase tracking-wider mb-1.5">Full Name <span class="text-red-500">*</span></label>
+            <input id="quoteName" name="quoteName" type="text" required autocomplete="name"
+              placeholder="John Smith"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue/20 outline-none transition text-navy text-sm font-medium bg-gray-50 focus:bg-white"
+            />
+          </div>
+          <div>
+            <label for="quoteEmail" class="block text-xs font-bold text-navy/60 uppercase tracking-wider mb-1.5">Email <span class="text-red-500">*</span></label>
+            <input id="quoteEmail" name="quoteEmail" type="email" required autocomplete="email"
+              placeholder="john@example.com"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue/20 outline-none transition text-navy text-sm font-medium bg-gray-50 focus:bg-white"
+            />
+          </div>
+          <div>
+            <label for="quotePhone" class="block text-xs font-bold text-navy/60 uppercase tracking-wider mb-1.5">Phone (optional)</label>
+            <input id="quotePhone" name="quotePhone" type="tel" autocomplete="tel"
+              placeholder="+1 (555) 000-0000"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue focus:ring-2 focus:ring-blue/20 outline-none transition text-navy text-sm font-medium bg-gray-50 focus:bg-white"
+            />
+          </div>
+
+          <!-- Feedback -->
+          <div id="quoteFeedback" class="hidden px-4 py-3 rounded-xl text-sm font-semibold text-center" role="alert"></div>
+
+          <button type="submit" id="quoteSubmitBtn"
+            class="btn btn-primary w-full flex items-center justify-center gap-2 py-4 text-sm font-bold mt-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span id="quoteSubmitText">Send My Quote Request</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <Footer />
 </MainLayout>
 
@@ -306,39 +380,29 @@ const t = useTranslations(lang);
     // --- Tabs Logic ---
     const tabs = document.querySelectorAll('[data-tab]');
     const contents = document.querySelectorAll('.tab-content');
-
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         const target = tab.getAttribute('data-tab');
-        
-        // Update tabs styling
-        tabs.forEach(t => {
-          t.classList.remove('bg-white', 'shadow-sm', 'text-blue');
-          t.classList.add('text-gray-400');
-        });
+        tabs.forEach(t => { t.classList.remove('bg-white', 'shadow-sm', 'text-blue'); t.classList.add('text-gray-400'); });
         tab.classList.add('bg-white', 'shadow-sm', 'text-blue');
         tab.classList.remove('text-gray-400');
-
-        // Update content visibility
         contents.forEach(content => {
-          if (content.id === `content-${target}`) {
-            content.classList.remove('hidden');
-          } else {
-            content.classList.add('hidden');
-          }
+          if (content.id === `content-${target}`) { content.classList.remove('hidden'); }
+          else { content.classList.add('hidden'); }
         });
       });
     });
 
     // --- Auto Refi Logic ---
     const form = document.getElementById('autoRefiForm') as HTMLFormElement;
+    if (!form || form.dataset.initialized) return; // guard against double init
+    form.dataset.initialized = 'true';
+
     const outputs = {
       newPayment: document.getElementById('outputNewPayment'),
       monthlySavings: document.getElementById('outputMonthlySavings'),
       interestSavings: document.getElementById('outputInterestSavings')
     };
-
-    if (!form) return;
 
     const formatCurrency = (val: number) => {
       return new Intl.NumberFormat('en-US', {
@@ -347,28 +411,34 @@ const t = useTranslations(lang);
       }).format(val);
     };
 
+    // Store latest calc results for the modal
+    let lastInputs  = { currentPayment: 0, balance: 0, currentRate: 0, newRate: 0, currentTerm: 0, newTerm: 0 };
+    let lastResults = { newMonthlyPayment: 0, monthlySavings: 0, totalInterestSaved: 0 };
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       
       const formData = new FormData(form);
-      const inputs = {
+      lastInputs = {
         currentPayment: Number(formData.get('currentPayment')) || 0,
-        balance: Number(formData.get('balance')) || 0,
-        currentRate: Number(formData.get('currentRate')) || 0,
-        newRate: Number(formData.get('newRate')) || 0,
-        currentTerm: Number(formData.get('currentTerm')) || 0,
-        newTerm: Number(formData.get('newTerm')) || 0,
+        balance:        Number(formData.get('balance'))        || 0,
+        currentRate:    Number(formData.get('currentRate'))    || 0,
+        newRate:        Number(formData.get('newRate'))        || 0,
+        currentTerm:    Number(formData.get('currentTerm'))    || 0,
+        newTerm:        Number(formData.get('newTerm'))        || 0,
       };
 
-      // Realizar el cálculo
-      const result = calculateAutoRefinance(inputs);
+      const result = calculateAutoRefinance(lastInputs);
+      lastResults = {
+        newMonthlyPayment:  result.newMonthlyPayment,
+        monthlySavings:     result.monthlySavings,
+        totalInterestSaved: result.totalInterestSaved,
+      };
 
-      // Actualizar la interfaz
-      if (outputs.newPayment) outputs.newPayment.textContent = formatCurrency(result.newMonthlyPayment);
+      if (outputs.newPayment)     outputs.newPayment.textContent     = formatCurrency(result.newMonthlyPayment);
       if (outputs.monthlySavings) outputs.monthlySavings.textContent = formatCurrency(result.monthlySavings);
       if (outputs.interestSavings) outputs.interestSavings.textContent = formatCurrency(result.totalInterestSaved);
 
-      // Efecto visual de resaltado en los resultados
       const resultCards = document.querySelectorAll('.result-card');
       resultCards.forEach(card => {
         card.classList.add('scale-105', 'ring-2', 'ring-blue/20');
@@ -376,11 +446,107 @@ const t = useTranslations(lang);
       });
     });
 
-    // Resetear valores
     form.addEventListener('reset', () => {
-      Object.values(outputs).forEach(out => {
-        if (out) out.textContent = '--';
-      });
+      Object.values(outputs).forEach(out => { if (out) out.textContent = '--'; });
+      lastInputs  = { currentPayment: 0, balance: 0, currentRate: 0, newRate: 0, currentTerm: 0, newTerm: 0 };
+      lastResults = { newMonthlyPayment: 0, monthlySavings: 0, totalInterestSaved: 0 };
+    });
+
+    // ── Quote Modal Logic ────────────────────────────────────────────────────
+    const quoteBtn       = document.getElementById('quoteBtn');
+    const quoteModal     = document.getElementById('quoteModal');
+    const quoteBackdrop  = document.getElementById('quoteModalBackdrop');
+    const quoteClose     = document.getElementById('quoteModalClose');
+    const quoteForm      = document.getElementById('quoteForm')      as HTMLFormElement;
+    const quoteSubmitBtn = document.getElementById('quoteSubmitBtn') as HTMLButtonElement;
+    const quoteSubmitTxt = document.getElementById('quoteSubmitText');
+    const quoteFeedback  = document.getElementById('quoteFeedback');
+
+    // Chips inside modal
+    const modalNewPayment      = document.getElementById('modalNewPayment');
+    const modalMonthlySavings  = document.getElementById('modalMonthlySavings');
+    const modalInterestSavings = document.getElementById('modalInterestSavings');
+
+    function openModal() {
+      // Must have calculated first
+      if (lastResults.newMonthlyPayment === 0) {
+        alert('Please calculate your refinancing results first.');
+        return;
+      }
+      // Populate chips
+      if (modalNewPayment)      modalNewPayment.textContent      = formatCurrency(lastResults.newMonthlyPayment);
+      if (modalMonthlySavings)  modalMonthlySavings.textContent  = formatCurrency(lastResults.monthlySavings);
+      if (modalInterestSavings) modalInterestSavings.textContent = formatCurrency(lastResults.totalInterestSaved);
+
+      quoteModal?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      quoteModal?.classList.add('hidden');
+      document.body.style.overflow = '';
+      quoteFeedback?.classList.add('hidden');
+      quoteForm?.reset();
+    }
+
+    quoteBtn?.addEventListener('click', openModal);
+    quoteClose?.addEventListener('click', closeModal);
+    quoteBackdrop?.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    function showQuoteFeedback(success: boolean, msg: string) {
+      if (!quoteFeedback) return;
+      quoteFeedback.textContent = msg;
+      quoteFeedback.className = 'px-4 py-3 rounded-xl text-sm font-semibold text-center';
+      quoteFeedback.classList.add(
+        success ? 'bg-green-50' : 'bg-red-50',
+        success ? 'text-green-700' : 'text-red-700'
+      );
+    }
+
+    quoteForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name  = (document.getElementById('quoteName')  as HTMLInputElement).value.trim();
+      const email = (document.getElementById('quoteEmail') as HTMLInputElement).value.trim();
+      const phone = (document.getElementById('quotePhone') as HTMLInputElement).value.trim();
+
+      if (!name || !email) {
+        showQuoteFeedback(false, 'Please enter your name and email.');
+        return;
+      }
+
+      quoteSubmitBtn.disabled = true;
+      if (quoteSubmitTxt) quoteSubmitTxt.textContent = 'Sending…';
+
+      try {
+        const res  = await fetch('/send_quote.php', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fullName: name,
+            email,
+            phone,
+            ...lastInputs,
+            ...lastResults,
+          }),
+        });
+
+        const json = await res.json();
+
+        if (res.ok && json.success) {
+          showQuoteFeedback(true, '✅ Request sent! Our team will reach out shortly.');
+          quoteForm.reset();
+          setTimeout(closeModal, 3000);
+        } else {
+          showQuoteFeedback(false, json.message || 'Something went wrong. Please try again.');
+        }
+      } catch {
+        showQuoteFeedback(false, 'Network error. Please try again.');
+      } finally {
+        quoteSubmitBtn.disabled = false;
+        if (quoteSubmitTxt) quoteSubmitTxt.textContent = 'Send My Quote Request';
+      }
     });
   });
 </script>
